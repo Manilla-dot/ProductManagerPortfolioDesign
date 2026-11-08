@@ -1,0 +1,10 @@
+{
+  "description": "Showcase your product management expertise with a portfolio that highlights strategy, user research, and leadership, designed for maximum impact.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
