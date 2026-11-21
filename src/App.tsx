@@ -58,80 +58,12 @@ const CASES: Case[] = [
   },
   {
     slug: "ekyc-activation",
-    name: "From eKYC to First Investment",
-    tags: ["Activation", "User Research", "Product Design"],
-    problem: "Owned the journey redesign from account opening and verification to application exploration and first investment execution.",
-    role: "Journey owner · Discovery to delivery",
-    highlights: ["Friction analysis", "Activation funnel optimisation", "User onboarding strategy"],
-    context: "The account opening journey spans identity verification, document upload, bank linking and regulatory checks, before a user can place their first order.",
-    detail: {
-      timeline: "26 days",
-      team: "eKYC team Quality test, Design team",
-      platform: "Android, IOS, Website",
-      contextMore: "This journey plays a critical role in the company's broader product strategy: converting new account registrations into active, funded users by reducing onboarding friction and accelerating time to first trade.",
-      hideLogo: true,
-      hideResearchShots: true,
-      hideSections: [4, 5, 7],
-      collab: {
-        0: { role: "Product Design team", initials: "Ps", text: "Collaborated on identifying UI friction, improving onboarding screens, CTA clarity and maintaining a consistent user journey." },
-        1: { text: "" },
-      },
-      thinking: [
-        "New users face friction across eKYC, account opening, app installation and funding, resulting in delays in reaching their first trade.",
-        "If we simplify onboarding, provide clear next steps and introduce timely, activity-based engagement, more users will complete account opening and place their first trade.",
-        "Fix broken eKYC flows, improve app redirection, introduce guided walkthroughs, strengthen communication and automate stage-based nudges.",
-      ],
-      decisionLogic: "Prioritize product-level blockers first, followed by high-impact communication and automation improvements based on user drop-offs, impact and implementation effort.",
-      businessCase: "Reducing onboarding drop-offs can improve acquisition-to-activation conversion, increase active traders and reduce manual follow-up efforts.",
-      expectedOutcomes: ["Higher eKYC completion.", "Improved account activation.", "Increased pay-in conversion.", "Higher first-trade conversion.", "Reduced time to first trade."],
-      problemLead: "Framed as a product problem, not a UX complaint.",
-      userProblem: "New users wanted to complete account opening, activate their trading accounts, add funds and place their first order. However, they faced friction across multiple stages, including identity verification, document submission, bank linking and account activation. Unclear process states, interrupted journeys and limited guidance made it difficult to understand what was pending and how to proceed, delaying their transition from registration to first trade.",
-      businessProblem: "Drop-offs across the account opening and activation funnel resulted in fewer registered users converting into funded and active traders. Delays in account activation reduced first-trade opportunities, affected acquisition-to-activation conversion, and created additional follow-up efforts for operations and support teams. The business needed to improve onboarding completion, reduce time to first trade and increase the conversion of newly opened accounts into active trading customers.",
-      hmw: "How might we simplify and streamline the end-to-end account opening and activation journey, from eKYC to first trade, so that new users can complete onboarding with minimal friction, understand their next steps, and start trading confidently, while increasing account activation, first-trade conversion and overall customer acquisition efficiency for the business?",
-      businessImpact: "Higher account activation, improved first-trade conversion and reduced acquisition wastage.",
-      userImpact: "Faster, simpler account opening with fewer interruptions and clearer next steps.",
-      strategicImpact: "Strengthens Alice Blue's account-to-trade activation funnel and supports long-term growth in active traders.",
-      research: {
-        0: { title: "Journey Observations", text: "Reviewed the new-user onboarding journey and identified friction points through eKYC, account opening, app installation, pay-in and first-trade stages. The audit focused on understanding where users get stuck and what prevents them from progressing." },
-        1: { text: "Evaluated the existing activation funnel, product flows, campaign triggers, communication channels and automation systems. Identified gaps in onboarding continuity, user engagement and first-trade conversion." },
-        2: {
-          title: "Competitive Analysis",
-          items: [
-            ["Groww", "Simplified account opening and beginner-friendly onboarding."],
-            ["Zerodha", "Structured onboarding with educational resources to support new traders."],
-            ["Angel One", "Integrated trading experience with guided product discovery."],
-            ["INDmoney", "Personalized investment experience and portfolio-focused engagement."],
-          ],
-          takeaway: "Alice Blue can improve its competitive positioning through simpler onboarding, guided activation, personalized communication and a smoother first-trade journey.",
-        },
-        3: {
-          title: "Funnel Analysis & Metrics",
-          table: {
-            head: ["Funnel stage", "Key metric"],
-            rows: [
-              ["Lead → eKYC", "eKYC initiation rate"],
-              ["eKYC → Account Opened", "Account opening completion rate"],
-              ["Account Opened → App Install", "App installation rate"],
-              ["App Install → First Login", "Login conversion rate"],
-              ["Login → Pay-in", "Pay-in conversion rate"],
-              ["Pay-in → First Trade", "First-trade conversion rate"],
-            ],
-          },
-        },
-        4: { text: "Reviewed inputs and operational details around LeadSquared, CleverTap, Netcore, eKYC vendor communications, campaign execution and product flows to identify system limitations and improvement opportunities." },
-        5: {
-          points: [
-            "PAN Skip redirects users incorrectly, restarting eKYC.",
-            "Incorrect KYC-success messaging creates confusion.",
-            "No Alice Blue-branded email communication during eKYC.",
-            "Guest-login and mid-funnel drop-off users receive limited nurturing.",
-            "WhatsApp is the primary engagement channel.",
-            "Push notifications and in-app walkthroughs are not active.",
-            "Manual campaign execution limits automation.",
-          ],
-        },
-      },
-    },
+    name: "From eKYC to First Trade",
+    tags: ["Activation", "Product Research", "Funnel Analysis"],
+    problem: "Researched why newly opened customers stall between eKYC and their first trade, and turned the findings into a product-led activation plan.",
+    role: "Product research · Journey audit · Funnel analysis",
+    highlights: ["Onboarding & eKYC audit", "First-trade rejection analysis", "Behaviour-based activation strategy"],
+    context: "This project examined the customer journey from eKYC and account opening through app installation, login, account funding and order execution.",
   },
   {
     slug: "ask-ant-audit",
@@ -920,8 +852,6 @@ function CaseStudy({ i, onProgress }: { i: number; onProgress: (p: number) => vo
   const d = c.detail ?? {};
   const shown = CS_SECTIONS.map((_, k) => k).filter((k) => !d.hideSections?.includes(k));
   const num = (k: number) => shown.indexOf(k) + 1;
-  const heroSrc = c.slug === "ekyc-activation" ? ekycHero : undefined;
-  const heroRatio = c.slug === "ekyc-activation" ? "aspect-[1043/557]" : "aspect-[21/9]";
 
   useEffect(() => {
     const on = () => {
@@ -961,7 +891,7 @@ function CaseStudy({ i, onProgress }: { i: number; onProgress: (p: number) => vo
             ))}
           </dl>
         </div>
-        <Placeholder label={c.slug === "ekyc-activation" ? "End-to-end activation funnel journey map" : heroSrc ? `${c.name} desktop and mobile screens` : `[Insert screenshot] · ${c.name} hero`} ratio={heroRatio} src={heroSrc} onOpen={() => setLb(`${c.name} — hero`)} />
+        <Placeholder label={`[Insert screenshot] · ${c.name} hero`} ratio="aspect-[21/9]" onOpen={() => setLb(`${c.name} — hero`)} />
       </div>
 
       <div className="mx-auto grid max-w-[1240px] gap-12 px-6 pt-20 pb-10 lg:grid-cols-[220px_1fr] lg:gap-20 lg:px-10">
@@ -980,13 +910,11 @@ function CaseStudy({ i, onProgress }: { i: number; onProgress: (p: number) => vo
           </nav>
         </aside>
         {/* mobile section chip */}
-        {c.slug !== "ekyc-activation" && (
-          <div className="sticky top-16 z-30 -mx-6 -mt-12 border-b border-line bg-paper/90 px-6 py-3 backdrop-blur lg:hidden">
-            <select value={active} onChange={(e) => scrollToId(`s${e.target.value}`)} className="w-full bg-transparent font-mono text-[12px]">
-              {shown.map((k, j) => <option key={k} value={k}>{String(j + 1).padStart(2, "0")} — {CS_SECTIONS[k]}</option>)}
-            </select>
-          </div>
-        )}
+        <div className="sticky top-16 z-30 -mx-6 -mt-12 border-b border-line bg-paper/90 px-6 py-3 backdrop-blur lg:hidden">
+          <select value={active} onChange={(e) => scrollToId(`s${e.target.value}`)} className="w-full bg-transparent font-mono text-[12px]">
+            {shown.map((k, j) => <option key={k} value={k}>{String(j + 1).padStart(2, "0")} — {CS_SECTIONS[k]}</option>)}
+          </select>
+        </div>
 
         <article className="min-w-0">
           <CSBlock i={0} n={num(0)}>
@@ -1179,22 +1107,6 @@ function CaseStudy({ i, onProgress }: { i: number; onProgress: (p: number) => vo
               <p className="font-mono text-[11px] uppercase tracking-[.14em] text-sage">What I learned as a product leader</p>
               <p className="mt-4 font-serif text-[23px] leading-snug">[2–3 sentences specific to {c.name}: a product decision you'd make differently, a cross-functional lesson, and what it taught you about impact.]</p>
             </div>
-            {c.slug === "ekyc-activation" && (
-              <div className="mt-6 rounded-lg border border-line bg-white p-8">
-                <p className="font-mono text-[11px] uppercase tracking-[.14em] text-ink-3">Working files</p>
-                <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                  {[
-                    ["Spreadsheet", "Analysis & data", "https://docs.google.com/spreadsheets/d/1jVGfnRiXnTlRNfRDsmqfzng5RDYJBHl5/edit?usp=sharing&ouid=104668827253228072421&rtpof=true&sd=true"],
-                    ["Presentation", "Case study deck", "https://docs.google.com/presentation/d/14FEXHKkkxAOILlanUz6M-I6pBhoZNuBx/edit?usp=sharing&ouid=104668827253228072421&rtpof=true&sd=true"],
-                  ].map(([kind, title, href]) => (
-                    <a key={href} href={href} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between rounded-md border border-line px-5 py-4 transition-colors hover:border-sage/40 hover:bg-sage-soft">
-                      <div><p className="font-mono text-[11px] uppercase tracking-[.12em] text-sage">{kind}</p><p className="mt-1 text-[16px] font-medium">{title}</p></div>
-                      <Arrow className="-rotate-45 transition-transform duration-200 group-hover:translate-x-0.5" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )}
           </CSBlock>
 
           <a href={`#/case/${next.slug}`} className="group mt-10 flex items-center justify-between rounded-lg border border-line bg-white p-8 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-24px_rgba(18,22,20,.3)]">
@@ -1204,7 +1116,7 @@ function CaseStudy({ i, onProgress }: { i: number; onProgress: (p: number) => vo
         </article>
       </div>
       <Footer />
-      <Lightbox label={lb} src={lb === `${c.name} — hero` ? heroSrc : undefined} onClose={() => setLb(null)} />
+      <Lightbox label={lb} onClose={() => setLb(null)} />
     </div>
   );
 }
@@ -1680,6 +1592,477 @@ function SuperAppCase({ i, onProgress }: { i: number; onProgress: (p: number) =>
   );
 }
 
+/* ───────────── From eKYC to First Trade (bespoke case study) ───────────── */
+
+const EK_SECTIONS: [string, string][] = [
+  ["Context", "Account opening is only the beginning."],
+  ["Problem definition", "Two connected problems."],
+  ["Research approach", "Evidence before solutions."],
+  ["Research synthesis", "Where customers need help."],
+  ["Product thinking", "From research to product opportunities."],
+  ["Activation strategy", "Connect product interventions with customer follow-up."],
+  ["Prioritisation", "What should be addressed first?"],
+  ["Measurement", "Define what success looks like."],
+  ["Progress & outputs", "What the work has produced so far."],
+  ["Key learnings", ""],
+  ["Research & working files", "The detailed evidence behind this case study."],
+];
+
+function EKBlock({ k, children }: { k: number; children: ReactNode }) {
+  const [title, lead] = EK_SECTIONS[k];
+  return (
+    <section id={`ek${k}`} className="reveal scroll-mt-24 border-t border-line py-16">
+      <p className="font-mono text-[12px] text-sage">{String(k + 1).padStart(2, "0")} —</p>
+      <h2 className="mt-2 text-[30px] font-medium tracking-[-.02em] sm:text-[36px]">{title}</h2>
+      {lead && <p className="mt-4 max-w-[640px] font-serif text-[20px] italic leading-snug text-ink-2">{lead}</p>}
+      <div className="mt-8 space-y-6">{children}</div>
+    </section>
+  );
+}
+
+const Num = ({ n }: { n: number }) => <span className="font-mono text-[11px] text-sage">{String(n).padStart(2, "0")}</span>;
+const fmt = (n: number) => n.toLocaleString("en-IN");
+
+const EK_JOURNEY = ["Lead", "eKYC", "Account opened", "App installation", "First login", "Pay-in", "First order attempt", "First successful trade"];
+
+const EK_AUDIT: [string, string][] = [
+  ["PAN Skip flow", "Selecting Skip did not redirect users to the expected guest-login experience and instead returned them to the beginning of the eKYC journey."],
+  ["Incorrect KYC-success messaging", "A success message appeared at a stage where eKYC was not yet fully completed, creating confusion."],
+  ["Unclear application redirection", "The end-of-eKYC CTA and subsequent app-download experience did not consistently match the user’s expectation."],
+  ["Limited brand communication", "eKYC-stage emails were vendor-branded, with no corresponding Alice Blue communication at that stage."],
+  ["Guest-login and mid-funnel gaps", "Users who entered guest login or dropped out midway did not have a complete nurturing journey."],
+];
+
+const EK_REJECTIONS: [string, number][] = [
+  ["No rejection reason recorded", 28040],
+  ["Insufficient funds / margin", 7195],
+  ["Exchange / segment / security permission", 2517],
+  ["Other / needs review", 2063],
+  ["Market timing / session restriction", 1056],
+  ["Order type / price / quantity restriction", 904],
+  ["System / technical issue", 213],
+  ["Account / PAN / KYC validation", 156],
+  ["Order cancellation / exchange response", 81],
+];
+
+const EK_CAMPAIGNS: [string, number, number, number][] = [
+  ["Diwali dormant", 518, 427, 10],
+  ["Diwali pay-in", 5599, 4555, 164],
+  ["Diwali trade", 668, 536, 53],
+  ["Pay-in follow-up", 4554, 3859, 62],
+  ["Trade follow-up", 536, 488, 16],
+];
+
+const EK_STATES: [string, string, string][] = [
+  ["Account opened, no first login", "The user has an opened account but has not yet accessed the application.", "Improve app discovery, login guidance and account-opening follow-up."],
+  ["Logged in, no pay-in", "The user has accessed the product but has not added funds.", "Explain the funding process, available payment options and relevant next steps."],
+  ["Pay-in completed, no first trade", "The user has funded the account but has not completed a successful first trade.", "Understand whether the user needs platform guidance, instrument discovery, margin clarity or human assistance."],
+  ["Order attempted, not successfully executed", "The user has shown trading intent but has encountered a barrier during order placement.", "Investigate the actual rejection reason and provide contextual recovery rather than a generic error message."],
+  ["First trade completed", "The user has completed the initial activation milestone.", "Move the customer into a separate repeat-trade and engagement journey instead of continuing first-trade nudges."],
+];
+
+function EkycCase({ i, onProgress }: { i: number; onProgress: (p: number) => void }) {
+  const c = CASES[i];
+  const [active, setActive] = useState(-1);
+  const [lb, setLb] = useState<string | null>(null);
+  const next = CASES[(i + 1) % CASES.length];
+  const heroLabel = `${c.name} — hero`;
+
+  useEffect(() => {
+    const on = () => {
+      const h = document.documentElement;
+      onProgress(Math.min(1, h.scrollTop / (h.scrollHeight - h.clientHeight || 1)));
+      let cur = -1;
+      EK_SECTIONS.forEach((_, k) => {
+        const el = document.getElementById(`ek${k}`);
+        if (el && el.getBoundingClientRect().top < 160) cur = k;
+      });
+      setActive(cur);
+    };
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => { window.removeEventListener("scroll", on); onProgress(0); };
+  }, [i, onProgress]);
+
+  const meta: [string, string][] = [
+    ["Research period", "August – November 2026"],
+    ["Platforms", "Android · iOS · Web"],
+    ["Role", "Product Research · Journey Audit · Funnel Analysis · Product Opportunity Planning"],
+    ["Cross-functional areas", "Product, Design, eKYC/Quality, DWH, CRM/Campaigns and Business Operations"],
+  ];
+  const maxRej = EK_REJECTIONS[0][1];
+
+  return (
+    <div className="page-enter">
+      <div className="mx-auto max-w-[1240px] px-6 pt-10 lg:px-10">
+        <nav aria-label="Breadcrumb" className="flex items-center gap-2 font-mono text-[12px] text-ink-3">
+          <a href="#/" className="hover:text-ink">Home</a><span>/</span>
+          <button onClick={() => { window.location.hash = "#/"; setTimeout(() => scrollToId("work"), 60); }} className="hover:text-ink">Work</button><span>/</span>
+          <span className="text-ink">{c.name}</span>
+        </nav>
+        <div className="grid gap-10 pt-14 pb-16 lg:grid-cols-[1.6fr_1fr] lg:items-end">
+          <div>
+            <div className="flex flex-wrap gap-2">{c.tags.map((t) => <Tag key={t} tone="sage">{t}</Tag>)}</div>
+            <h1 className="mt-6 text-[42px] font-semibold leading-[1.02] tracking-[-.035em] sm:text-[64px]">{c.name}</h1>
+            <p className="mt-4 text-[18px] font-medium tracking-[-.01em] text-ink-2 sm:text-[20px]">Product Research, Activation Analysis &amp; First-Trade Improvement Strategy</p>
+            <p className="mt-6 max-w-[620px] font-serif text-[22px] italic leading-snug text-ink">How can Alice Blue help more newly opened customers progress from account verification to their first successful trade?</p>
+          </div>
+          <dl className="grid grid-cols-2 gap-5 border-t border-line pt-6 lg:border-t-0 lg:border-l lg:pl-8 lg:pt-0">
+            {meta.map(([k, v], n) => (
+              <div key={k} className={n > 1 ? "col-span-2" : ""}><dt className="font-mono text-[11px] uppercase tracking-[.12em] text-ink-3">{k}</dt><dd className="mt-1 text-[14px] leading-snug">{v}</dd></div>
+            ))}
+          </dl>
+        </div>
+        <Placeholder label="End-to-end activation funnel journey map" ratio="aspect-[1043/557]" src={ekycHero} onOpen={() => setLb(heroLabel)} />
+      </div>
+
+      <div className="mx-auto grid max-w-[1240px] gap-12 px-6 pt-20 pb-10 lg:grid-cols-[220px_1fr] lg:gap-20 lg:px-10">
+        <aside className="hidden lg:block">
+          <nav className="sticky top-24">
+            <p className="mb-4 font-mono text-[11px] uppercase tracking-[.14em] text-ink-3">On this page</p>
+            <ol className="space-y-0.5 border-l border-line">
+              {EK_SECTIONS.map(([s], k) => (
+                <li key={s}>
+                  <button onClick={() => scrollToId(`ek${k}`)} className={`-ml-px flex w-full gap-3 border-l py-1.5 pl-4 text-left text-[13.5px] transition-colors duration-200 ${active === k ? "border-sage text-ink" : "border-transparent text-ink-3 hover:text-ink"}`}>
+                    <span className="pt-px font-mono text-[11px]">{String(k + 1).padStart(2, "0")}</span>{s}
+                  </button>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </aside>
+
+        <article className="min-w-0">
+          {/* Overview */}
+          <section className="reveal pb-16">
+            <p className="font-mono text-[11px] uppercase tracking-[.14em] text-ink-3">Project overview</p>
+            <div className="mt-6 space-y-5">
+              <P>This project examined the customer journey from eKYC and account opening through app installation, login, account funding and order execution. The objective was to identify where customers were getting stuck, understand the reasons behind activation drop-offs, and translate those findings into product and operational improvements.</P>
+              <P>Rather than treating first-trade conversion as a campaign problem alone, the research examined the complete activation experience, including product usability, customer behaviour, communication gaps, trading permissions and order-rejection barriers.</P>
+            </div>
+          </section>
+
+          {/* 01 Context */}
+          <EKBlock k={0}>
+            <P>Alice Blue’s customer journey does not end when an account is successfully opened. A newly registered customer still needs to understand how to access the platform, complete the initial setup, add funds, discover trading opportunities and place an order successfully.</P>
+            <p className="font-mono text-[11px] uppercase tracking-[.12em] text-ink-3">The broader activation journey</p>
+            <FlowChain steps={EK_JOURNEY} />
+            <P>Each transition represents an opportunity for the customer to progress, or drop off. The initial activation audit focused on the onboarding and communication experience. The subsequent first-trade research extended the investigation into customer behaviour, funding activity, order failures and product-level barriers.</P>
+            <div className="rounded-lg bg-ink p-8 text-paper">
+              <p className="font-mono text-[11px] uppercase tracking-[.14em] text-paper/50">The central question</p>
+              <p className="mt-4 font-serif text-[22px] leading-snug sm:text-[24px]">Are customers failing to reach their first trade because they are not engaging with the product, because they do not understand the next step, or because the product is preventing them from completing an order?</p>
+            </div>
+          </EKBlock>
+
+          {/* 02 Problem */}
+          <EKBlock k={1}>
+            <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line md:grid-cols-2">
+              {[
+                ["User problem", "Newly opened customers may not know what to do after completing account opening. Some do not log in or add funds. Others reach the trading platform but encounter unclear requirements, insufficient margin, inactive trading segments or confusing order errors.", "Without relevant guidance at the point of friction, customers may stop before completing their first successful trade."],
+                ["Business problem", "Alice Blue acquires and opens customer accounts, but account opening alone does not translate into active trading. The business needs to understand which customers are progressing, where they are dropping off and which barriers are preventing first-trade completion.", "Improving this journey requires more than increasing communication frequency. It requires identifying the actual customer barrier and addressing it through the appropriate product, operational or engagement intervention."],
+              ].map(([h, a, b]) => (
+                <div key={h} className="space-y-3 bg-white p-6">
+                  <p className="font-mono text-[11px] uppercase tracking-[.12em] text-sage">{h}</p>
+                  <p className="text-[15.5px] leading-relaxed text-ink-2">{a}</p>
+                  <p className="text-[15.5px] leading-relaxed text-ink-2">{b}</p>
+                </div>
+              ))}
+            </div>
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[.12em] text-ink-3">How might we</p>
+              <blockquote className="mt-3 border-l-2 border-sage pl-6 font-serif text-[22px] leading-snug">How might we identify and resolve the barriers preventing newly opened customers from progressing through login, funding and order placement, so that more eligible customers can complete their first successful trade with a clearer and more reliable experience?</blockquote>
+            </div>
+          </EKBlock>
+
+          {/* 03 Research */}
+          <EKBlock k={2}>
+            <P>The investigation was structured across five areas.</P>
+            <ol className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-5">
+              {["Onboarding & eKYC audit", "Activation & communication audit", "First-trade data analysis", "Rejection analysis", "Feedback & campaigns"].map((t, n) => (
+                <li key={t} className="bg-white p-4"><span className="font-mono text-[11px] text-sage">3.{n + 1}</span><p className="mt-2 text-[13.5px] font-medium leading-snug">{t}</p></li>
+              ))}
+            </ol>
+
+            <H3>3.1 Existing onboarding and eKYC audit</H3>
+            <P>I reviewed the onboarding journey to understand how users move from eKYC initiation to account opening and application exploration.</P>
+            <div className="divide-y divide-line rounded-lg border border-line bg-white">
+              {EK_AUDIT.map(([h, t], n) => (
+                <div key={h} className="grid gap-2 p-5 md:grid-cols-[40px_220px_1fr]"><Num n={n + 1} /><p className="text-[15px] font-medium">{h}</p><p className="text-[15px] leading-relaxed text-ink-2">{t}</p></div>
+              ))}
+            </div>
+            <P>These findings showed that some customers could be interrupted before reaching the trading application itself.</P>
+
+            <H3>3.2 Activation journey and communication audit</H3>
+            <P>I reviewed the communication journey across account opening, app installation, login, pay-in and first trade. The audit covered:</P>
+            <div className="flex flex-wrap gap-2">
+              {["Audience and trigger conditions", "WhatsApp, email, SMS and push availability", "Communication timing and frequency", "CTA relevance and destination", "Deep-link behaviour", "Campaign automation and ownership"].map((t) => <Tag key={t} tone="outline">{t}</Tag>)}
+            </div>
+            <P>The review highlighted a strong dependence on WhatsApp, partial email coverage, inactive push notifications and limited in-app guidance. It also identified gaps in the coordination of LeadSquared, CleverTap, Netcore and OneLink. Different systems handled different parts of the journey, while some campaign and engagement activities still required manual execution.</P>
+            <Note label="Research takeaway">Communication was available across several stages, but the customer experience was not yet a consistently connected, behaviour-based activation journey.</Note>
+
+            <H3>3.3 First-trade data analysis</H3>
+            <P>The investigation then moved beyond the onboarding audit to examine customer records and trading behaviour. I worked with the DWH lead-stuck data and organised the source data into a structured Excel workbook, preserving the raw records and creating separate B2B and B2C views for analysis.</P>
+            <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-3">
+              {[["42,223", "Unique client IDs"], ["33,880", "B2B clients"], ["8,343", "B2C clients"]].map(([n, l]) => (
+                <div key={l} className="bg-white p-6"><p className="text-[36px] font-semibold leading-none tracking-[-.03em]">{n}</p><p className="mt-2 font-mono text-[11px] uppercase tracking-[.12em] text-ink-3">{l}</p></div>
+              ))}
+            </div>
+            <DataTable
+              head={["Dataset view", "Records"]}
+              rows={[["Total source data rows", "42,225"], ["Populated, unique CLIENT_IDs", "42,223"], ["B2B clients", "33,880"], ["B2C clients", "8,343"], ["Blank source rows retained", "2"]].map(([a, b]) => [a, <span key={a} className="tabular-nums">{b}</span>])}
+            />
+            <p className="font-mono text-[11px] leading-relaxed text-ink-3">The B2B and B2C breakdown represents the classification available in the source export. It is a starting point for comparative analysis, not a confirmation that every record is an eligible first-trade target.</p>
+            <P>The analysis was structured around fields including:</P>
+            <div className="grid gap-x-10 gap-y-2.5 sm:grid-cols-2">
+              <Bullets list={["Account and UCC response dates.", "First and last trade dates.", "First and last login dates.", "Total login activity.", "First and last pay-in dates."]} />
+              <Bullets list={["Number and amount of pay-ins.", "B2B/B2C classification.", "First-trade classification.", "Trade-failure status and rejected-order counts.", "Rejection reasons and account verification fields."]} />
+            </div>
+            <P>The purpose was to move from a single large lead list towards a clearer understanding of customer status and behaviour.</P>
+
+            <H3>3.4 First-trade rejection analysis</H3>
+            <P>A key part of the research was understanding what happens when a customer attempts to place an order but does not successfully execute it. The DWH analysis grouped rejection-related records into the following categories:</P>
+            <div className="rounded-lg border border-line bg-white p-6">
+              <div className="mb-4 flex justify-between font-mono text-[11px] uppercase tracking-[.12em] text-ink-3"><span>Rejection category</span><span>Records reported</span></div>
+              <ul className="space-y-3.5">
+                {EK_REJECTIONS.map(([l, v], n) => (
+                  <li key={l}>
+                    <div className="flex items-baseline justify-between gap-4 text-[14px]"><span className={n === 0 ? "text-ink-3" : "text-ink"}>{l}</span><span className="tabular-nums font-medium">{fmt(v)}</span></div>
+                    <div className="mt-1.5 h-1.5 rounded-full bg-paper-2"><div className={`h-full rounded-full ${n === 0 ? "bg-ink-3/30" : "bg-sage"}`} style={{ width: `${Math.max(0.6, (v / maxRej) * 100)}%` }} /></div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <p className="text-[15px] font-medium">What this indicated</p>
+            <div className="grid gap-4 md:grid-cols-3">
+              {[
+                ["Funding and margin clarity", "Customers may have funds in their account but insufficient margin for a particular order, or may not understand the required amount before placing it."],
+                ["Trading permissions", "A customer may be ready to trade but unable to proceed because the required exchange or trading segment is not enabled."],
+                ["Order execution experience", "Market-session restrictions, AMO handling and order-validation errors can interrupt the first-order journey."],
+              ].map(([h, t], n) => (
+                <div key={h} className="rounded-lg border border-line bg-white p-6"><Num n={n + 1} /><p className="mt-3 text-[16px] font-medium">{h}</p><p className="mt-2 text-[15px] leading-relaxed text-ink-2">{t}</p></div>
+              ))}
+            </div>
+            <P>The large number of records without a recorded rejection reason also highlighted a data-quality opportunity: improving the completeness and clarity of rejection classification.</P>
+            <Note label="Data interpretation">The rejection figures are the categories reported in the DWH presentation. They should not be interpreted as confirmed unique customers who lost their first trade. The final first-trade analysis needs to isolate rejection events before first successful execution, validate the cohort period and distinguish customers from order events.</Note>
+
+            <H3>3.5 Customer feedback and campaign performance</H3>
+            <P>To complement the data analysis, I reviewed the WhatsApp account-setup survey and recent activation campaign results.</P>
+            <div className="rounded-lg border border-line bg-white p-6">
+              <div className="flex items-baseline justify-between"><p className="text-[15px] font-medium">Account-setup survey</p><p className="font-mono text-[11px] uppercase tracking-[.12em] text-ink-3">75 responses</p></div>
+              <div className="mt-5 flex h-3 overflow-hidden rounded-full">
+                <div className="bg-sage" style={{ width: `${(46 / 75) * 100}%` }} />
+                <div className="bg-sage/45" style={{ width: `${(15 / 75) * 100}%` }} />
+                <div className="bg-ink-3/30" style={{ width: `${(14 / 75) * 100}%` }} />
+              </div>
+              <div className="mt-5 grid gap-4 sm:grid-cols-3">
+                {[["46", "Said the steps after account opening were clear", "bg-sage"], ["15", "Said they needed help getting started", "bg-sage/45"], ["14", "Needed clarification", "bg-ink-3/30"]].map(([n, l, dot]) => (
+                  <div key={l} className="flex gap-3"><span className={`mt-2 size-2 shrink-0 rounded-full ${dot}`} /><div><p className="text-[24px] font-semibold leading-none tracking-tight">{n}</p><p className="mt-1.5 text-[13.5px] leading-snug text-ink-2">{l}</p></div></div>
+                ))}
+              </div>
+            </div>
+            <P>However, a technical issue prevented users from progressing to the second survey question. This limited the feedback available on specific assistance requirements and preferred support channels.</P>
+            <P>The November campaign review showed that messages could reach and engage a large audience, but click-through activity remained comparatively low.</P>
+            <DataTable
+              head={["Campaign", "Sent", "Delivered", "Clicked", "Click rate*"]}
+              rows={EK_CAMPAIGNS.map(([n, s, d, cl]) => [n, fmt(s), fmt(d), fmt(cl), <span key={n} className="font-medium text-ink">{((cl / d) * 100).toFixed(1)}%</span>])}
+            />
+            <p className="font-mono text-[11px] text-ink-3">* Click rate calculated as clicked ÷ delivered.</p>
+            <P>The campaign results suggested that communication reach alone was not enough to ensure users progressed towards their first trade. This reinforced the need to connect communication with the actual product journey: a user who has not added funds needs a different intervention from someone who has funded their account but is facing an order rejection.</P>
+          </EKBlock>
+
+          {/* 04 Synthesis */}
+          <EKBlock k={3}>
+            <P>The research brought together the onboarding audit, activation data, customer feedback and order-rejection observations. It highlighted five customer states that require different responses.</P>
+            <ol className="relative space-y-3">
+              {EK_STATES.map(([h, what, opp], n) => (
+                <li key={h} className={`grid gap-4 rounded-lg border p-6 md:grid-cols-[48px_1fr_1fr] ${n === 4 ? "border-sage/30 bg-sage-soft" : "border-line bg-white"}`}>
+                  <span className="grid size-9 place-items-center rounded-full border border-line bg-paper font-mono text-[12px] text-sage">{n + 1}</span>
+                  <div><p className="text-[16px] font-medium">{h}</p><p className="mt-2 text-[14.5px] leading-relaxed text-ink-2"><span className="font-mono text-[10.5px] uppercase tracking-[.12em] text-ink-3">What may be happening · </span>{what}</p></div>
+                  <p className="text-[14.5px] leading-relaxed text-ink-2 md:border-l md:border-line md:pl-6"><span className="mb-1 block font-mono text-[10.5px] uppercase tracking-[.12em] text-sage">Opportunity</span>{opp}</p>
+                </li>
+              ))}
+            </ol>
+            <P>These states form the foundation for behaviour-based activation and more relevant product interventions.</P>
+          </EKBlock>
+
+          {/* 05 Product thinking */}
+          <EKBlock k={4}>
+            <P>The research indicated that different customer barriers require different solutions. I translated the findings into three key product opportunities.</P>
+            {[
+              {
+                t: "Pre-trade margin clarity",
+                problem: <p>A customer may select an instrument and attempt to place an order without clearly understanding the margin required. A rejection at this point can interrupt the experience and create uncertainty about how much additional funding is needed.</p>,
+                improve: <><p>Introduce a pre-trade margin health check that displays:</p><div className="mt-3"><Bullets list={["Required margin.", "Available margin.", "Shortfall amount.", "A contextual Add Funds action.", "An alternative financing route, where the product and customer are eligible."]} /></div></>,
+                exp: "Instead of showing a generic insufficient-margin error after an order attempt, explain the shortfall before submission and help the user decide what to do next.",
+                measures: ["Margin-related rejection rate", "Pay-in-to-first-trade conversion", "Order completion rate"],
+              },
+              {
+                t: "Smart trading-segment activation",
+                problem: <><p>A customer may have funds and trading intent but be unable to place an order because the required exchange or trading segment has not been activated.</p><p className="mt-3">The user may not understand why the order is being rejected or where to enable the missing permission.</p></>,
+                improve: <><p>Introduce contextual segment activation within the order journey.</p><ol className="mt-3 space-y-2">{["Detect the instrument and required segment.", "Check whether the customer’s segment is active.", "Explain the missing permission before the order fails.", "Offer an activation action.", "Return the customer to the original instrument or order screen after successful activation."].map((s, n) => <li key={s} className="flex gap-3"><Num n={n + 1} />{s}</li>)}</ol></>,
+                exp: "The order should not be submitted automatically after activation; the user must review and confirm it.",
+                measures: ["Permission-related rejection rate", "Activation completion rate", "First-order success rate"],
+              },
+              {
+                t: "Better AMO experience",
+                problem: <><p>When attempting an order outside regular market hours, the Alice Blue error message, <code className="rounded bg-paper-2 px-1.5 py-0.5 font-mono text-[12.5px] text-ink">Transaction not allowed in current state END_OF_DAY</code>, does not clearly explain the market-closed condition.</p><p className="mt-3">The user also needs to manually select AMO, creating another decision in the order flow.</p><p className="mt-3"><span className="font-medium text-ink">Competitive observation:</span> during a comparison with Groww, the after-market order experience provided clearer confirmation that the order would be queued for the next trading session.</p></>,
+                improve: <Bullets list={["Detect market-closed conditions.", "Make AMO availability clear.", "Preselect AMO where applicable, while requiring the user to review and confirm.", "Preserve the user’s order details where safe.", "Clearly explain that the order is queued for the next eligible session, not guaranteed to execute.", "Provide understandable reasons if the order cannot be accepted."]} />,
+                exp: "",
+                measures: ["AMO acceptance rate", "After-hours order drop-off", "Market-session-related rejection rate"],
+              },
+            ].map((o, n) => (
+              <div key={o.t} className="overflow-hidden rounded-lg border border-line bg-white">
+                <div className="flex items-baseline gap-4 border-b border-line px-6 py-5">
+                  <span className="font-mono text-[12px] text-sage">Opportunity {String(n + 1).padStart(2, "0")}</span>
+                  <p className="text-[20px] font-medium tracking-[-.01em]">{o.t}</p>
+                </div>
+                <div className="grid gap-px bg-line md:grid-cols-2">
+                  <div className="bg-white p-6 text-[15px] leading-relaxed text-ink-2"><p className="mb-3 font-mono text-[11px] uppercase tracking-[.12em] text-ink-3">Problem identified</p>{o.problem}</div>
+                  <div className="bg-white p-6 text-[15px] leading-relaxed text-ink-2"><p className="mb-3 font-mono text-[11px] uppercase tracking-[.12em] text-sage">Proposed improvement</p>{o.improve}</div>
+                </div>
+                <div className="space-y-4 border-t border-line bg-paper px-6 py-5">
+                  {o.exp && <p className="font-serif text-[18px] italic leading-snug text-ink">{o.exp}</p>}
+                  <div className="flex flex-wrap items-center gap-2"><span className="mr-1 font-mono text-[11px] uppercase tracking-[.12em] text-ink-3">Success measures</span>{o.measures.map((m) => <Tag key={m}>{m}</Tag>)}</div>
+                </div>
+              </div>
+            ))}
+          </EKBlock>
+
+          {/* 06 Activation strategy */}
+          <EKBlock k={5}>
+            <P>Product improvements alone will not address every customer barrier. The next step is to connect the identified customer segments with appropriate operational and communication actions.</P>
+            <ol className="divide-y divide-line rounded-lg border border-line bg-white">
+              <li className="grid gap-3 p-6 md:grid-cols-[80px_1fr]"><span className="font-mono text-[12px] text-sage">Step 1</span><div><p className="text-[16px] font-medium">Address product-level barriers</p><p className="mt-2 text-[15px] leading-relaxed text-ink-2">Prioritise margin clarity, trading-segment activation and AMO improvements because these directly affect the order-placement experience.</p></div></li>
+              <li className="grid gap-3 p-6 md:grid-cols-[80px_1fr]"><span className="font-mono text-[12px] text-sage">Step 2</span><div><p className="text-[16px] font-medium">Contact funded but non-traded customers</p><p className="mt-2 text-[15px] leading-relaxed text-ink-2">Prepare an actionable cohort of customers who have completed pay-in but have not completed their first successful trade. Use Sales or Support outreach to:</p><div className="mt-3"><Bullets list={["Understand why they have not traded.", "Identify whether they need platform guidance.", "Clarify margin and segment requirements.", "Record customer objections and recurring blockers.", "Feed the findings back into Product and Design."]} /></div></div></li>
+              <li className="grid gap-3 p-6 md:grid-cols-[80px_1fr]"><span className="font-mono text-[12px] text-sage">Step 3</span><div><p className="text-[16px] font-medium">Improve behaviour-based communication</p><p className="mt-2 text-[15px] leading-relaxed text-ink-2">Move away from generic first-trade messaging.</p>
+                <div className="mt-4 overflow-hidden rounded-md border border-line">
+                  {[["No login", "Help the customer access the application."], ["No pay-in", "Explain how to add funds."], ["Pay-in completed, no trade", "Provide first-order guidance."], ["Permission rejection", "Explain the missing segment and activation process."], ["Margin rejection", "Explain the shortfall and available next steps."]].map(([s, a]) => (
+                    <div key={s} className="grid gap-1 border-b border-line px-4 py-3 text-[14px] last:border-b-0 sm:grid-cols-[200px_1fr]"><span className="font-medium text-ink">{s}</span><span className="text-ink-2">{a}</span></div>
+                  ))}
+                </div>
+              </div></li>
+              <li className="grid gap-3 p-6 md:grid-cols-[80px_1fr]"><span className="font-mono text-[12px] text-sage">Step 4</span><div><p className="text-[16px] font-medium">Track conversion and optimise</p><p className="mt-2 text-[15px] leading-relaxed text-ink-2">Track the journey from account opening through first successful execution. Review campaign engagement alongside actual product events so that message delivery or clicks are not mistaken for successful activation.</p></div></li>
+            </ol>
+          </EKBlock>
+
+          {/* 07 Prioritisation */}
+          <EKBlock k={6}>
+            <DataTable
+              head={["Priority", "Product / operational action", "Rationale"]}
+              first=""
+              rows={[
+                ["P0", "Fix broken eKYC redirection and misleading status messaging", "Prevent users from getting blocked before account opening"],
+                ["P1", "Improve margin and segment-related order guidance", "Address barriers close to the point of order placement"],
+                ["P1", "Improve AMO experience and error clarity", "Reduce confusion during market-closed order attempts"],
+                ["P1", "Create a funded-but-not-traded customer cohort", "Understand the reasons behind the remaining activation gap"],
+                ["P2", "Build behaviour-based activation communication", "Make customer follow-up relevant to their journey stage"],
+                ["P2", "Establish a unified measurement and optimisation loop", "Connect product and campaign activity to actual first-trade outcomes"],
+              ].map(([p, a, r]) => [<Tag key={a} tone={p === "P0" ? "sage" : p === "P1" ? "neutral" : "outline"}>{p}</Tag>, <span key={a + "a"} className="font-medium text-ink">{a}</span>, r])}
+            />
+            <Note label="Note">Priorities are proposed based on the observed problem areas and expected customer impact. Final sequencing should be confirmed with Product, Engineering, Business and Data teams after feasibility and dependency review.</Note>
+          </EKBlock>
+
+          {/* 08 Measurement */}
+          <EKBlock k={7}>
+            <div>
+              <div className="rounded-t-lg bg-ink p-8 text-paper">
+                <p className="font-mono text-[11px] uppercase tracking-[.14em] text-paper/50">Primary success metric</p>
+                <p className="mt-3 text-[26px] font-medium tracking-tight sm:text-[30px]">Account Opened → First Successful Trade Conversion</p>
+                <p className="mt-3 max-w-[620px] text-[15px] leading-relaxed text-paper/65">The percentage of eligible newly opened accounts that complete their first successful trade within an agreed measurement period.</p>
+              </div>
+              <div className="grid gap-px rounded-b-lg border border-t-0 border-line bg-line md:grid-cols-[1.6fr_1fr]">
+                <div className="bg-white p-6">
+                  <p className="mb-4 font-mono text-[11px] uppercase tracking-[.12em] text-ink-3">Supporting KPIs</p>
+                  <ul className="divide-y divide-line">
+                    {[["eKYC completion rate", "Progress through identity verification"], ["Account opening completion rate", "Successful account creation"], ["First login rate", "Initial application activation"], ["Pay-in conversion rate", "Progression from login to funding"], ["Order attempt rate", "Trading intent"], ["First-order success rate", "Ability to complete an initial order"], ["First-trade conversion rate", "Conversion into an active trading customer"], ["Median time to first trade", "Time taken to reach first successful execution"]].map(([k, w]) => (
+                      <li key={k} className="grid gap-1 py-2.5 text-[14px] sm:grid-cols-[1fr_1.1fr]"><span className="font-medium">{k}</span><span className="text-ink-2">{w}</span></li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="bg-white p-6">
+                  <p className="mb-4 font-mono text-[11px] uppercase tracking-[.12em] text-ink-3">Guardrail metrics</p>
+                  <Bullets list={["Order rejection rate.", "Payment failure rate.", "Customer support complaints.", "Duplicate or unintended order submissions.", "Communication opt-outs and complaints."]} />
+                </div>
+              </div>
+            </div>
+            <Note label="Measurement requirement">Before setting targets, establish a consistent customer cohort, unique customer definition, first successful execution event and measurement window. Compare the results by B2B/B2C segment and activation stage. A controlled experiment should be used wherever possible to distinguish the impact of a product or campaign intervention from normal customer behaviour.</Note>
+          </EKBlock>
+
+          {/* 09 Progress */}
+          <EKBlock k={8}>
+            <P>The work has produced a set of research and planning outputs that can be used by Product, Design, Engineering, Data, CRM and Business teams.</P>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="rounded-lg border border-line bg-white p-6">
+                <p className="mb-4 font-mono text-[11px] uppercase tracking-[.12em] text-sage">Completed research and analysis</p>
+                <ul className="space-y-2.5">
+                  {["Audited the new-user onboarding and eKYC journey.", "Documented product, communication and redirection gaps.", "Reviewed activation triggers, communication channels and automation dependencies.", "Organised the DWH source export into a structured workbook with raw data, separate B2B and B2C records, summary and data-quality views.", "Reviewed first-trade rejection categories and identified areas requiring deeper validation.", "Reviewed customer survey responses and campaign performance.", "Compared selected competitor experiences for first-order and AMO journeys.", "Identified product opportunities around margin, trading permissions and order execution."].map((t) => (
+                    <li key={t} className="flex gap-3 text-[14.5px] leading-relaxed text-ink-2"><svg viewBox="0 0 16 16" className="mt-1 size-3.5 shrink-0 text-sage" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M3 8.5l3 3 7-7" /></svg>{t}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-lg border border-dashed border-line bg-paper p-6">
+                <p className="mb-4 font-mono text-[11px] uppercase tracking-[.12em] text-ink-3">Proposed next steps</p>
+                <ol className="space-y-2.5">
+                  {["Validate the targetable customer population and B2B/B2C behaviour differences.", "Isolate first-trade-related failures from rejections occurring after a customer’s first successful trade.", "Investigate the funded-but-not-traded cohort through customer outreach.", "Validate technical feasibility and prioritise the proposed order-flow improvements.", "Establish baseline KPIs and monitor post-implementation conversion."].map((t, n) => (
+                    <li key={t} className="flex gap-3 text-[14.5px] leading-relaxed text-ink-2"><span className="pt-[3px]"><Num n={n + 1} /></span>{t}</li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+            <Note label="Current status">Research, analysis and product opportunity planning completed to the extent documented in the linked materials. Proposed interventions and their business impact remain subject to validation, prioritisation and implementation.</Note>
+          </EKBlock>
+
+          {/* 10 Learnings */}
+          <EKBlock k={9}>
+            <div className="grid gap-4 md:grid-cols-2">
+              {[
+                ["Account opening is not activation.", "A customer can successfully complete eKYC and still face several barriers before becoming an active trader. The product needs to support the entire journey, not just registration."],
+                ["Data needs customer context.", "Login, pay-in and rejection counts help identify patterns, but they do not independently explain why a customer stopped. Combining behavioural data, customer feedback, operational observations and product testing gives a more complete picture."],
+                ["The right intervention depends on the user’s stage.", "A generic reminder cannot solve a missing trading permission or an unclear margin requirement. Product experiences and communications need to respond to the actual barrier."],
+                ["First-trade conversion is a cross-functional product problem.", "Improving it requires Product, Design, Engineering, Data, CRM and Business teams to work from a shared understanding of the customer journey and measurable outcomes."],
+              ].map(([h, t], n) => (
+                <div key={h} className="rounded-lg border border-line bg-white p-6">
+                  <span className="font-serif text-[32px] leading-none text-sage">{n + 1}.</span>
+                  <p className="mt-3 font-serif text-[21px] leading-snug">{h}</p>
+                  <p className="mt-2 text-[15px] leading-relaxed text-ink-2">{t}</p>
+                </div>
+              ))}
+            </div>
+          </EKBlock>
+
+          {/* 11 Files */}
+          <EKBlock k={10}>
+            <div className="divide-y divide-line rounded-lg border border-line bg-white">
+              {[
+                ["PPT", "First-Trade Research & Next-Steps Presentation", "Contains the DWH analysis, first-trade rejection observations, SWOT, proposed product interventions, campaign review and execution roadmap.", "https://docs.google.com/presentation/d/19Dx2-FjJsoMmzqaq_s5WGTDAmmqkxfxi/edit?usp=sharing&ouid=104668827253228072421&rtpof=true&sd=true"],
+                ["Excel", "First-Trade Analysis Workbook", "Contains the original raw data, separate B2B and B2C records, summary analysis, blank source-row view and data-quality checks.", "https://docs.google.com/spreadsheets/d/1fN-48Ul_kHFvwAm8PPVny7UmQJELk9Hf/edit?usp=sharing&ouid=104668827253228072421&rtpof=true&sd=true"],
+                ["PPT", "New User Activation Audit", "Contains the eKYC journey review, communication audit, campaign trigger assessment, product gaps and prioritised onboarding recommendations.", "https://docs.google.com/presentation/d/14FEXHKkkxAOILlanUz6M-I6pBhoZNuBx/edit?usp=sharing&ouid=104668827253228072421&rtpof=true&sd=true"],
+              ].map(([kind, title, desc, href], n) => (
+                <a key={title} href={href} target="_blank" rel="noopener noreferrer" className="group grid gap-3 p-6 transition-colors hover:bg-sage-soft md:grid-cols-[40px_1fr_auto] md:items-start">
+                  <Num n={n + 1} />
+                  <div><p className="font-mono text-[11px] uppercase tracking-[.12em] text-sage">{kind}</p><p className="mt-1 text-[17px] font-medium">{title}</p><p className="mt-2 text-[14.5px] leading-relaxed text-ink-2">{desc}</p></div>
+                  <span className="inline-flex items-center gap-2 justify-self-start rounded-md border border-line bg-white px-3 py-1.5 font-mono text-[11px] uppercase tracking-[.08em] text-ink transition-colors group-hover:border-sage/40 group-hover:text-sage">Open <Arrow className="size-3.5 -rotate-45" /></span>
+                </a>
+              ))}
+            </div>
+            <div className="rounded-lg border border-sage/30 bg-sage-soft p-8">
+              <p className="font-mono text-[11px] uppercase tracking-[.14em] text-sage">The objective of this work</p>
+              <p className="mt-4 font-serif text-[23px] leading-snug">Move from understanding where customers drop off to identifying why they do not reach their first successful trade, and creating a measurable, product-led plan to help them progress.</p>
+            </div>
+          </EKBlock>
+
+          <a href={`#/case/${next.slug}`} className="group mt-10 flex items-center justify-between rounded-lg border border-line bg-white p-8 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-24px_rgba(18,22,20,.3)]">
+            <div><p className="font-mono text-[11px] uppercase tracking-[.14em] text-ink-3">Next case study</p><p className="mt-2 text-[24px] font-semibold tracking-tight">{next.name}</p></div>
+            <span className="grid size-11 place-items-center rounded-full border border-line transition-colors group-hover:bg-ink group-hover:text-paper"><Arrow /></span>
+          </a>
+        </article>
+      </div>
+      <Footer />
+      <Lightbox label={lb} src={lb === heroLabel ? ekycHero : undefined} onClose={() => setLb(null)} />
+    </div>
+  );
+}
+
 /* ───────────── Design system ───────────── */
 
 function DSRow({ label, children }: { label: string; children: ReactNode }) {
@@ -1824,7 +2207,7 @@ export default function App() {
       <Header route={route} progress={route.name === "case" ? progress : undefined} />
       <main key={key} className="page-enter">
         {route.name === "home" && <Home />}
-        {route.name === "case" && (CASES[route.i].slug === "super-app" ? <SuperAppCase i={route.i} onProgress={setProgress} /> : <CaseStudy i={route.i} onProgress={setProgress} />)}
+        {route.name === "case" && (CASES[route.i].slug === "super-app" ? <SuperAppCase i={route.i} onProgress={setProgress} /> : CASES[route.i].slug === "ekyc-activation" ? <EkycCase i={route.i} onProgress={setProgress} /> : <CaseStudy i={route.i} onProgress={setProgress} />)}
         {route.name === "system" && <><System /><Footer /></>}
       </main>
     </div>
