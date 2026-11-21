@@ -1,6 +1,10 @@
 import { Fragment, useEffect, useState, type ReactNode } from "react";
 import superAppHero from "./assets/super-app-hero.png";
 import ekycHero from "./assets/ekyc-hero.png";
+import superAppRoadmap from "./assets/super-app-roadmap.png";
+import superAppQc from "./assets/super-app-qc-tracker.png";
+import superAppModules from "./assets/super-app-modules.png";
+import resumePdf from "./assets/manilla-chandrika-resume.pdf";
 
 /* ───────────── Editable content ───────────── */
 
@@ -22,14 +26,23 @@ type Case = {
     team?: string;
     platform?: string;
     contextMore?: string;
+    contextRich?: ReactNode;
     hideLogo?: boolean;
+    hideResearchShots?: boolean;
+    hideSections?: number[];
+    thinking?: [string, string, string];
+    decisionLogic?: string;
+    businessCase?: string;
+    expectedOutcomes?: string[];
+    collab?: Record<number, { role?: string; initials?: string; question?: string; text?: string }>;
     problemLead?: string;
     userProblem?: string;
     businessProblem?: string;
     hmw?: string;
-    businessImpact?: string;
-    userImpact?: string;
-    research?: Record<number, { title?: string; text?: string }>;
+    businessImpact?: ReactNode;
+    userImpact?: ReactNode;
+    strategicImpact?: string;
+    research?: Record<number, { title?: string; text?: string; listLabel?: string; bullets?: string[]; items?: [string, string][]; takeaway?: string; points?: string[]; tableIntro?: string; table?: { head: [string, string]; rows: [string, string][] }; groups?: { title: string; text?: string; label?: string; bullets?: string[] }[] }>;
   };
 };
 
@@ -37,11 +50,11 @@ const CASES: Case[] = [
   {
     slug: "super-app",
     name: "Alice Blue Super App",
-    tags: ["Product Strategy", "Fintech", "Product Leadership"],
-    problem: "Led product strategy to explore how Alice Blue can bring investing, trading, learning and wealth experiences into a more connected ecosystem.",
-    role: "Product strategy lead · Vision to roadmap",
-    highlights: ["Unified product vision", "Cross-product integration strategy", "User experience cohesion"],
-    context: "Alice Blue operates multiple products across trading, investing, learning and wealth. Each evolved independently, with its own entry point, account context and mental model.",
+    tags: ["Product Strategy", "Roadmap Execution", "Cross-functional Delivery"],
+    problem: "Coordinated product planning and delivery for a multi-product Super App across eight financial product areas, on mobile and web.",
+    role: "Product planning · Delivery coordination",
+    highlights: ["Roadmap execution", "Design sign-off & handoff", "QA, UAT & bug triage"],
+    context: "Alice Blue Super App was a product transformation initiative aimed at bringing multiple financial services and trading experiences into a connected digital platform.",
   },
   {
     slug: "ekyc-activation",
@@ -57,16 +70,66 @@ const CASES: Case[] = [
       platform: "Android, IOS, Website",
       contextMore: "This journey plays a critical role in the company's broader product strategy: converting new account registrations into active, funded users by reducing onboarding friction and accelerating time to first trade.",
       hideLogo: true,
+      hideResearchShots: true,
+      hideSections: [4, 5, 7],
+      collab: {
+        0: { role: "Product Design team", initials: "Ps", text: "Collaborated on identifying UI friction, improving onboarding screens, CTA clarity and maintaining a consistent user journey." },
+        1: { text: "" },
+      },
+      thinking: [
+        "New users face friction across eKYC, account opening, app installation and funding, resulting in delays in reaching their first trade.",
+        "If we simplify onboarding, provide clear next steps and introduce timely, activity-based engagement, more users will complete account opening and place their first trade.",
+        "Fix broken eKYC flows, improve app redirection, introduce guided walkthroughs, strengthen communication and automate stage-based nudges.",
+      ],
+      decisionLogic: "Prioritize product-level blockers first, followed by high-impact communication and automation improvements based on user drop-offs, impact and implementation effort.",
+      businessCase: "Reducing onboarding drop-offs can improve acquisition-to-activation conversion, increase active traders and reduce manual follow-up efforts.",
+      expectedOutcomes: ["Higher eKYC completion.", "Improved account activation.", "Increased pay-in conversion.", "Higher first-trade conversion.", "Reduced time to first trade."],
       problemLead: "Framed as a product problem, not a UX complaint.",
       userProblem: "New users wanted to complete account opening, activate their trading accounts, add funds and place their first order. However, they faced friction across multiple stages, including identity verification, document submission, bank linking and account activation. Unclear process states, interrupted journeys and limited guidance made it difficult to understand what was pending and how to proceed, delaying their transition from registration to first trade.",
       businessProblem: "Drop-offs across the account opening and activation funnel resulted in fewer registered users converting into funded and active traders. Delays in account activation reduced first-trade opportunities, affected acquisition-to-activation conversion, and created additional follow-up efforts for operations and support teams. The business needed to improve onboarding completion, reduce time to first trade and increase the conversion of newly opened accounts into active trading customers.",
       hmw: "How might we simplify and streamline the end-to-end account opening and activation journey, from eKYC to first trade, so that new users can complete onboarding with minimal friction, understand their next steps, and start trading confidently, while increasing account activation, first-trade conversion and overall customer acquisition efficiency for the business?",
       businessImpact: "Higher account activation, improved first-trade conversion and reduced acquisition wastage.",
       userImpact: "Faster, simpler account opening with fewer interruptions and clearer next steps.",
+      strategicImpact: "Strengthens Alice Blue's account-to-trade activation funnel and supports long-term growth in active traders.",
       research: {
         0: { title: "Journey Observations", text: "Reviewed the new-user onboarding journey and identified friction points through eKYC, account opening, app installation, pay-in and first-trade stages. The audit focused on understanding where users get stuck and what prevents them from progressing." },
         1: { text: "Evaluated the existing activation funnel, product flows, campaign triggers, communication channels and automation systems. Identified gaps in onboarding continuity, user engagement and first-trade conversion." },
+        2: {
+          title: "Competitive Analysis",
+          items: [
+            ["Groww", "Simplified account opening and beginner-friendly onboarding."],
+            ["Zerodha", "Structured onboarding with educational resources to support new traders."],
+            ["Angel One", "Integrated trading experience with guided product discovery."],
+            ["INDmoney", "Personalized investment experience and portfolio-focused engagement."],
+          ],
+          takeaway: "Alice Blue can improve its competitive positioning through simpler onboarding, guided activation, personalized communication and a smoother first-trade journey.",
+        },
+        3: {
+          title: "Funnel Analysis & Metrics",
+          table: {
+            head: ["Funnel stage", "Key metric"],
+            rows: [
+              ["Lead → eKYC", "eKYC initiation rate"],
+              ["eKYC → Account Opened", "Account opening completion rate"],
+              ["Account Opened → App Install", "App installation rate"],
+              ["App Install → First Login", "Login conversion rate"],
+              ["Login → Pay-in", "Pay-in conversion rate"],
+              ["Pay-in → First Trade", "First-trade conversion rate"],
+            ],
+          },
+        },
         4: { text: "Reviewed inputs and operational details around LeadSquared, CleverTap, Netcore, eKYC vendor communications, campaign execution and product flows to identify system limitations and improvement opportunities." },
+        5: {
+          points: [
+            "PAN Skip redirects users incorrectly, restarting eKYC.",
+            "Incorrect KYC-success messaging creates confusion.",
+            "No Alice Blue-branded email communication during eKYC.",
+            "Guest-login and mid-funnel drop-off users receive limited nurturing.",
+            "WhatsApp is the primary engagement channel.",
+            "Push notifications and in-app walkthroughs are not active.",
+            "Manual campaign execution limits automation.",
+          ],
+        },
       },
     },
   },
@@ -149,7 +212,7 @@ const DownIcon = () => (
   <svg viewBox="0 0 16 16" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M8 2v9M4 7l4 4 4-4M3 14h10" /></svg>
 );
 
-function Btn({ variant = "primary", children, onClick, href, disabled, className = "" }: { variant?: "primary" | "secondary" | "ghost"; children: ReactNode; onClick?: () => void; href?: string; disabled?: boolean; className?: string }) {
+function Btn({ variant = "primary", children, onClick, href, download, disabled, className = "" }: { variant?: "primary" | "secondary" | "ghost"; children: ReactNode; onClick?: () => void; href?: string; download?: string; disabled?: boolean; className?: string }) {
   const base = "group inline-flex items-center gap-2 text-[14px] font-medium transition-all duration-200 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage disabled:cursor-not-allowed";
   const v = {
     primary: "h-11 px-5 rounded-md bg-ink text-paper hover:bg-sage active:bg-[#173f37] active:scale-[.98] disabled:bg-line disabled:text-ink-3",
@@ -157,7 +220,7 @@ function Btn({ variant = "primary", children, onClick, href, disabled, className
     ghost: "text-ink hover:text-sage underline-offset-4 decoration-1 hover:underline disabled:text-ink-3",
   }[variant];
   const cls = `${base} ${v} ${className}`;
-  if (href) return <a href={href} className={cls} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">{children}</a>;
+  if (href) return <a href={href} download={download} className={cls} target={!download && href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">{children}</a>;
   return <button onClick={onClick} disabled={disabled} className={cls}>{children}</button>;
 }
 
@@ -602,41 +665,189 @@ function About() {
   );
 }
 
-const RESUME: [string, string[]][] = [
-  ["Summary", ["Product manager with a design background, focused on fintech discovery, activation and investing experiences."]],
-  ["Experience", ["[Role] · Alice Blue · [Dates]", "[Describe collaboration point]", "[Role] · [Company] · [Dates]"]],
-  ["Product Skills", ["Discovery", "Roadmapping", "Prioritisation", "PRDs", "GTM"]],
-  ["Data & Analytics", ["Funnel analysis", "Cohorts", "A/B testing", "SQL [verify]"]],
-  ["Cross-functional Leadership", ["Engineering alignment", "Stakeholder management", "Design direction"]],
-  ["Projects", CASES.slice(0, 4).map((c) => c.name)],
-  ["Education", ["[Degree] · [Institution] · [Year]"]],
-  ["Tools", ["Figma", "Mixpanel [verify]", "Jira", "Notion"]],
-];
+const CV = {
+  name: "P Manilla Chandrika",
+  title: "Product Manager · UX Experience · AI & Fintech Product",
+  contact: [
+    ["Email", "chandrikamanilla@gmail.com", "mailto:chandrikamanilla@gmail.com"],
+    ["Phone", "+91 78427 76721", "tel:+917842776721"],
+    ["LinkedIn", "linkedin.com/in/manilla1306", "https://www.linkedin.com/in/manilla1306/"],
+    ["Location", "Bangalore, India", ""],
+  ] as [string, string, string][],
+  summary:
+    "Organized and detail-oriented Product Manager with hands-on experience across fintech products at Alice Blue, specialising in trading, investing, wealth, onboarding, eKYC and customer experience. Transforms user problems and product observations into clear requirements, PRDs, user stories, product roadmaps, product audit reports and data analysis. Coordinates product discovery, competitor analysis, prioritisation and Agile execution, and collaborates closely with engineering, business, quality and design teams through UAT and iterative releases. Focuses on building simple, scalable products using user research, data-informed decisions and strong product thinking.",
+  skills: [
+    ["Product Strategy", "Vision, roadmap thinking, opportunity analysis, information architecture, feature definition, product market benchmarking."],
+    ["Product Execution", "PRDs, user stories, acceptance criteria, workflows, UAT, release reviews, cross-functional collaboration."],
+    ["Product Discovery", "User problem identification, user observation, competitor research, journey mapping, UX research."],
+    ["Product Analytics", "Funnel metrics, user journey analysis, feedback analysis, adoption, activation, engagement."],
+    ["Prioritisation & Decisions", "Impact versus effort analysis, trade-off evaluation, feature prioritisation, MVP thinking."],
+    ["Fintech Domain", "Trading, investing, mutual funds, wealth, eKYC, onboarding, portfolio management, order workflows, API products."],
+  ] as [string, string][],
+  tools: ["Figma", "Jira", "Google Sheets", "Notion", "Power BI", "Copilot", "Perplexity", "NotebookLM", "Claude", "ChatPRD", "OpenAI"],
+  experience: [
+    {
+      org: "Alice Blue",
+      role: "Product Designer, Product Execution",
+      period: "April 2024 – Present",
+      groups: [
+        ["Product Strategy and Execution", [
+          "Defined product requirements and translated business decisions into PRDs, user stories, acceptance criteria and release plans.",
+          "Collaborated with engineering, design and business teams to identify user problems and evaluate solutions.",
+          "Contributed to the product vision for a unified investment ecosystem bridging stocks, mutual funds, wealth and trading.",
+          "Developed the Learn → Practice → Invest → Trade → Grow product concept to connect educational and financial platforms.",
+          "Conducted competitor research across Groww, Zerodha, Angel One and INDmoney to identify market opportunity gaps and usability improvements.",
+          "Organized UAT, release reviews and stakeholder discussions to resolve product gaps before launch.",
+        ]],
+        ["Fintech and Trading Products", [
+          "Structured the product architecture for the new trading UI to optimise navigation, positions, holdings, watchlists and order workflows.",
+          "Defined the UX requirements for ANT Scalper by organising NIFTY charts, open interest data and stop-loss interactions.",
+          "Created product concepts for a Trading Command Center to guide users from market intent to actionable trading steps.",
+          "Researched intent-based navigation models tailored for Trader, Investor and Explorer personas to simplify product discovery.",
+          "Evaluated 1ly Algos and API product experiences against competitors to identify improvements for strategy building and beginner accessibility.",
+          "Reviewed ASK ANT user flows and feature experiences to improve functional usability.",
+        ]],
+        ["Growth, eKYC and Customer Activation", [
+          "Improved eKYC and onboarding journeys by resolving friction across registration, verification and account activation.",
+          "Designed a post-eKYC experience that allows users to explore the product while backend verification is in progress.",
+          "Optimised workflows for guest login, app installation tracking, verification status communication and WhatsApp confirmation.",
+          "Streamlined the onboarding process by reducing unnecessary pop-ups while maintaining compliance and communication requirements.",
+        ]],
+        ["Wealth Management and Product Analytics", [
+          "Defined the information architecture for Alice Blue Wealth to cover equities, mutual funds, asset allocation and external investments.",
+          "Partnered on the FinFactor integration to map how external financial data appears within the native wealth ecosystem.",
+          "Explored native product expansion opportunities for SIP, FD, NPS and portfolio health.",
+          "Built a new UI feedback initiative to categorise user observations into discoverability, usability and functional problems to guide product prioritisation.",
+        ]],
+      ] as [string, string[]][],
+    },
+    {
+      org: "Mobile Premier League",
+      role: "Senior Designer",
+      period: "Feb 2020 – Sep 2023",
+      groups: [["", [
+        "Designed platform assets and user experiences for a mobile gaming platform serving over 9 crore users.",
+        "Supported product engagement and discoverability across 60+ games in categories such as fantasy sports and arcade games.",
+        "Created logo designs and visual deliverables for real-money gaming features within a high-traffic consumer application.",
+      ]]] as [string, string[]][],
+    },
+    {
+      org: "Fabric Monde",
+      role: "Merchandiser and Designer",
+      period: "Aug 2018 – Jan 2020",
+      groups: [["", [
+        "Managed supplier onboarding workflows to connect small-scale producers with global fashion brands.",
+        "Executed quality control tasks to ensure product deliverables met standard acceptance criteria.",
+        "Handled fabric merchandising and design requirements in a fast-growing B2B startup environment.",
+      ]]] as [string, string[]][],
+    },
+  ],
+  education: [
+    ["Indian Institute of Technology Hyderabad", "Design and Visual Communication", "Jan 2023 – Aug 2023"],
+    ["Tamil Nadu Open University", "Bachelor of Commerce (B.Com)", "2014 – 2017"],
+    ["Kendriya Vidyalaya", "CBSE", "2001 – 2013"],
+  ] as [string, string, string][],
+  certifications: [
+    ["AI Product Management", "Coursera"],
+    ["Enterprise Product Management Fundamentals", "Coursera"],
+    ["Power BI", "Coursera"],
+    ["Product Management: Building a Product Strategy", "LinkedIn Learning"],
+    ["What Is Generative AI", "LinkedIn Learning"],
+    ["Becoming a Product Manager: A Complete Guide", "LinkedIn Learning"],
+  ] as [string, string][],
+};
+
+const CvLabel = ({ children }: { children: ReactNode }) => <p className="font-mono text-[11px] uppercase tracking-[.14em] text-sage">{children}</p>;
 
 function Resume() {
   return (
     <Section id="resume" n="07" eyebrow="Resume" title="Resume" tone="alt">
       <div className="reveal rounded-lg border border-line bg-paper p-2">
-        <div className="rounded-md border border-line bg-white p-6 sm:p-10">
-          <div className="flex flex-wrap items-end justify-between gap-4 border-b border-line pb-6">
-            <div><p className="text-[24px] font-semibold tracking-tight">{NAME}</p><p className="text-ink-3">Product Manager · {EMAIL}</p></div>
-            <Tag tone="outline">Preview · 1 page</Tag>
+        <div className="rounded-md border border-line bg-white p-6 sm:p-10 lg:p-12">
+          {/* Header */}
+          <div className="flex flex-wrap items-end justify-between gap-6 border-b border-line pb-8">
+            <div>
+              <p className="text-[28px] font-semibold tracking-[-.02em] sm:text-[34px]">{CV.name}</p>
+              <p className="mt-1 text-[15px] text-ink-2">{CV.title}</p>
+            </div>
+            <Tag tone="outline">2 pages · PDF</Tag>
           </div>
-          <div className="grid gap-x-12 gap-y-8 pt-8 md:grid-cols-2">
-            {RESUME.map(([h, items]) => (
-              <div key={h} className="grid grid-cols-[140px_1fr] gap-4">
-                <p className="font-mono text-[11px] uppercase tracking-[.1em] text-ink-3">{h}</p>
-                <div className="flex flex-wrap gap-x-3 gap-y-1.5 text-[14px] text-ink-2">
-                  {items.map((it) => <span key={it} className={items.length > 3 || h === "Product Skills" ? "after:ml-3 after:text-line after:content-['/'] last:after:content-['']" : "w-full"}>{it}</span>)}
-                </div>
+          <dl className="grid gap-4 border-b border-line py-6 sm:grid-cols-2 lg:grid-cols-4">
+            {CV.contact.map(([k, v, href]) => (
+              <div key={k}>
+                <dt className="font-mono text-[11px] uppercase tracking-[.12em] text-ink-3">{k}</dt>
+                <dd className="mt-1 text-[14px]">{href ? <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="underline decoration-line underline-offset-4 transition-colors hover:text-sage hover:decoration-sage">{v}</a> : v}</dd>
               </div>
             ))}
+          </dl>
+
+          {/* Summary */}
+          <div className="grid gap-4 border-b border-line py-8 lg:grid-cols-[200px_1fr]">
+            <CvLabel>Summary</CvLabel>
+            <p className="max-w-[760px] text-[15.5px] leading-[1.75] text-ink-2">{CV.summary}</p>
+          </div>
+
+          {/* Experience */}
+          <div className="grid gap-4 border-b border-line py-8 lg:grid-cols-[200px_1fr]">
+            <CvLabel>Experience</CvLabel>
+            <div className="space-y-10">
+              {CV.experience.map((e) => (
+                <div key={e.org}>
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                    <p className="text-[18px] font-medium tracking-[-.01em]">{e.org} <span className="font-normal text-ink-3">· {e.role}</span></p>
+                    <p className="font-mono text-[12px] text-ink-3">{e.period}</p>
+                  </div>
+                  <div className="mt-4 space-y-5">
+                    {e.groups.map(([g, pts]) => (
+                      <div key={g || e.org}>
+                        {g && <p className="mb-2.5 text-[14px] font-medium text-ink">{g}</p>}
+                        <Bullets list={pts} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Skills */}
+          <div className="grid gap-4 border-b border-line py-8 lg:grid-cols-[200px_1fr]">
+            <CvLabel>Skills</CvLabel>
+            <div>
+              <div className="grid gap-x-10 gap-y-5 md:grid-cols-2">
+                {CV.skills.map(([h, t]) => (
+                  <div key={h}><p className="text-[14px] font-medium">{h}</p><p className="mt-1 text-[14px] leading-relaxed text-ink-2">{t}</p></div>
+                ))}
+              </div>
+              <p className="mt-7 text-[14px] font-medium">Tools</p>
+              <div className="mt-3 flex flex-wrap gap-2">{CV.tools.map((t) => <Tag key={t}>{t}</Tag>)}</div>
+            </div>
+          </div>
+
+          {/* Education & certifications */}
+          <div className="grid gap-10 pt-8 md:grid-cols-2">
+            <div>
+              <CvLabel>Education</CvLabel>
+              <ul className="mt-5 space-y-4">
+                {CV.education.map(([school, course, years]) => (
+                  <li key={school}><p className="text-[15px] font-medium">{school}</p><p className="text-[14px] text-ink-2">{course}</p><p className="mt-0.5 font-mono text-[11px] text-ink-3">{years}</p></li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <CvLabel>Certifications</CvLabel>
+              <ul className="mt-5 divide-y divide-line">
+                {CV.certifications.map(([name, by]) => (
+                  <li key={name} className="flex items-baseline justify-between gap-4 py-2.5 first:pt-0"><span className="text-[14px]">{name}</span><span className="shrink-0 font-mono text-[11px] text-ink-3">{by}</span></li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
       <div className="mt-8 flex flex-wrap gap-3">
-        <Btn href="#"><DownIcon /> Download Resume</Btn>
-        <Btn variant="secondary" href={LINKEDIN}>View LinkedIn <Arrow /></Btn>
+        <Btn href={resumePdf} download="P-Manilla-Chandrika-Resume.pdf"><DownIcon /> Download Resume (PDF)</Btn>
+        <Btn variant="secondary" href="https://www.linkedin.com/in/manilla1306/">View LinkedIn <Arrow /></Btn>
       </div>
     </Section>
   );
@@ -681,16 +892,23 @@ function Home() {
 
 const CS_SECTIONS = ["Context", "Problem", "Why It Matters", "Research", "Key Insights", "Opportunity", "Product Thinking", "Solution", "Collaboration", "Measurement", "Outcome", "Learnings"];
 
-function CSBlock({ i, children, lead }: { i: number; children: ReactNode; lead?: string }) {
+function CSBlock({ i, n = i + 1, children, lead }: { i: number; n?: number; children: ReactNode; lead?: string }) {
+  if (n === 0) return null;
   return (
     <section id={`s${i}`} className="reveal scroll-mt-24 border-t border-line py-16 first:border-t-0 first:pt-0">
-      <p className="font-mono text-[12px] text-sage">{String(i + 1).padStart(2, "0")} —</p>
+      <p className="font-mono text-[12px] text-sage">{String(n).padStart(2, "0")} —</p>
       <h2 className="mt-2 text-[30px] font-medium tracking-[-.02em] sm:text-[36px]">{CS_SECTIONS[i]}</h2>
       {lead && <p className="mt-4 max-w-[640px] font-serif text-[20px] italic leading-snug text-ink-2">{lead}</p>}
       <div className="mt-8">{children}</div>
     </section>
   );
 }
+
+const Bullets = ({ list }: { list: string[] }) => (
+  <ul className="space-y-2.5">
+    {list.map((t) => <li key={t} className="flex gap-2.5 text-[15px] leading-relaxed text-ink-2"><span className="mt-[10px] h-1 w-1 shrink-0 rounded-full bg-sage" />{t}</li>)}
+  </ul>
+);
 
 const P = ({ children }: { children: ReactNode }) => <p className="max-w-[680px] text-[17px] leading-[1.7] text-ink-2">{children}</p>;
 const Ph = ({ children }: { children: ReactNode }) => <span className="rounded bg-sage-soft px-1.5 py-0.5 font-mono text-[13px] text-sage">{children}</span>;
@@ -700,7 +918,9 @@ function CaseStudy({ i, onProgress }: { i: number; onProgress: (p: number) => vo
   const [active, setActive] = useState(0);
   const [lb, setLb] = useState<string | null>(null);
   const d = c.detail ?? {};
-  const heroSrc = c.slug === "super-app" ? superAppHero : c.slug === "ekyc-activation" ? ekycHero : undefined;
+  const shown = CS_SECTIONS.map((_, k) => k).filter((k) => !d.hideSections?.includes(k));
+  const num = (k: number) => shown.indexOf(k) + 1;
+  const heroSrc = c.slug === "ekyc-activation" ? ekycHero : undefined;
   const heroRatio = c.slug === "ekyc-activation" ? "aspect-[1043/557]" : "aspect-[21/9]";
 
   useEffect(() => {
@@ -749,32 +969,34 @@ function CaseStudy({ i, onProgress }: { i: number; onProgress: (p: number) => vo
           <nav className="sticky top-24">
             <p className="mb-4 font-mono text-[11px] uppercase tracking-[.14em] text-ink-3">On this page</p>
             <ol className="space-y-0.5 border-l border-line">
-              {CS_SECTIONS.map((s, k) => (
+              {shown.map((k) => CS_SECTIONS[k]).map((s, j) => { const k = shown[j]; return (
                 <li key={s}>
                   <button onClick={() => scrollToId(`s${k}`)} className={`-ml-px flex w-full gap-3 border-l py-1.5 pl-4 text-left text-[13.5px] transition-colors duration-200 ${active === k ? "border-sage text-ink" : "border-transparent text-ink-3 hover:text-ink"}`}>
-                    <span className="font-mono text-[11px] pt-px">{String(k + 1).padStart(2, "0")}</span>{s}
+                    <span className="font-mono text-[11px] pt-px">{String(j + 1).padStart(2, "0")}</span>{s}
                   </button>
                 </li>
-              ))}
+              ); })}
             </ol>
           </nav>
         </aside>
         {/* mobile section chip */}
-        <div className="sticky top-16 z-30 -mx-6 -mt-12 border-b border-line bg-paper/90 px-6 py-3 backdrop-blur lg:hidden">
-          <select value={active} onChange={(e) => scrollToId(`s${e.target.value}`)} className="w-full bg-transparent font-mono text-[12px]">
-            {CS_SECTIONS.map((s, k) => <option key={s} value={k}>{String(k + 1).padStart(2, "0")} — {s}</option>)}
-          </select>
-        </div>
+        {c.slug !== "ekyc-activation" && (
+          <div className="sticky top-16 z-30 -mx-6 -mt-12 border-b border-line bg-paper/90 px-6 py-3 backdrop-blur lg:hidden">
+            <select value={active} onChange={(e) => scrollToId(`s${e.target.value}`)} className="w-full bg-transparent font-mono text-[12px]">
+              {shown.map((k, j) => <option key={k} value={k}>{String(j + 1).padStart(2, "0")} — {CS_SECTIONS[k]}</option>)}
+            </select>
+          </div>
+        )}
 
         <article className="min-w-0">
-          <CSBlock i={0}>
+          <CSBlock i={0} n={num(0)}>
             <div className={`grid gap-8 ${d.hideLogo ? "" : "md:grid-cols-[1fr_200px]"}`}>
-              <div className="space-y-5"><P>{c.context}</P><P>{d.contextMore ?? "[Add 1–2 sentences: who the users are, scale of the product, and where this work sits in the company's strategy.]"}</P></div>
+              <div className="space-y-5"><P>{d.contextRich ?? c.context}</P><P>{d.contextMore ?? "[Add 1–2 sentences: who the users are, scale of the product, and where this work sits in the company's strategy.]"}</P></div>
               {!d.hideLogo && <Placeholder label="[Logo / identifier]" ratio="aspect-square" dense />}
             </div>
           </CSBlock>
 
-          <CSBlock i={1} lead={d.problemLead ?? "Framed as a product problem — not a UX complaint."}>
+          <CSBlock i={1} n={num(1)} lead={d.problemLead ?? "Framed as a product problem — not a UX complaint."}>
             <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line md:grid-cols-2">
               {[["User problem", d.userProblem ?? "[Describe what users were trying to do and where they got stuck.]"], ["Business problem", d.businessProblem ?? "[Describe the cost to the business — lost activation, revenue, trust or support load.]"]].map(([h, t]) => (
                 <div key={h} className="bg-white p-6"><p className="font-mono text-[11px] uppercase tracking-[.12em] text-sage">{h}</p><p className="mt-3 text-[15.5px] leading-relaxed text-ink-2">{t}</p></div>
@@ -783,31 +1005,87 @@ function CaseStudy({ i, onProgress }: { i: number; onProgress: (p: number) => vo
             <blockquote className="mt-8 border-l-2 border-sage pl-6 font-serif text-[22px] leading-snug">{d.hmw ?? '"How might we [problem statement] so that [user outcome] and [business outcome]?"'}</blockquote>
           </CSBlock>
 
-          <CSBlock i={2}>
+          <CSBlock i={2} n={num(2)}>
             <div className="grid gap-4 md:grid-cols-3">
-              {[["Business impact", d.businessImpact ?? <Ph>[Add metric]</Ph>], ["User impact", d.userImpact ?? "[Qualitative or quantitative]"], ["Strategic importance", "[Why the org cared now]"]].map(([h, t], k) => (
+              {[["Business impact", d.businessImpact ?? <Ph>[Add metric]</Ph>], ["User impact", d.userImpact ?? "[Qualitative or quantitative]"], ["Strategic importance", d.strategicImpact ?? "[Why the org cared now]"]].map(([h, t], k) => (
                 <div key={k} className="rounded-lg border border-line bg-white p-6"><p className="text-[15px] font-medium">{h}</p><div className="mt-6 text-[15px] text-ink-2">{t}</div></div>
               ))}
             </div>
           </CSBlock>
 
-          <CSBlock i={3} lead="Evidence before opinions.">
+          <CSBlock i={3} n={num(3)} lead="Evidence before opinions.">
             <div className="divide-y divide-line rounded-lg border border-line bg-white">
               {[["User research & interviews", "[Add research findings]"], ["Product & market analysis", "[Add research findings]"], ["Competitive landscape", "[Add competitors reviewed and takeaways]"], ["Data analysis & funnel metrics", "[Insert screenshot or metric]"], ["Stakeholder feedback", "[Describe collaboration point]"], ["Key observations & synthesis", "[Add synthesis]"]].map(([h, t], k) => (
                 <div key={h} className="grid gap-2 p-6 md:grid-cols-[40px_1fr_1.3fr]">
                   <span className="font-mono text-[11px] text-ink-3">4.{k + 1}</span>
                   <p className="text-[15px] font-medium">{d.research?.[k]?.title ?? h}</p>
-                  {d.research?.[k]?.text ? <p className="text-[15px] leading-relaxed text-ink-2">{d.research[k].text}</p> : <p><Ph>{t}</Ph></p>}
+                  {(() => {
+                    const r = d.research?.[k];
+                    if (!r || !(r.text || r.points || r.bullets || r.items || r.table || r.groups)) return <p><Ph>{t}</Ph></p>;
+                    return (
+                      <div className="space-y-4">
+                        {r.text && <p className="text-[15px] leading-relaxed text-ink-2">{r.text}</p>}
+                        {r.listLabel && <p className="font-mono text-[11px] uppercase tracking-[.12em] text-sage">{r.listLabel}</p>}
+                        {r.points && (
+                          <ol className="space-y-2.5">
+                            {r.points.map((pt, n) => (
+                              <li key={pt} className="flex gap-3 text-[15px] leading-relaxed text-ink-2"><span className="pt-[3px] font-mono text-[11px] text-sage">{String(n + 1).padStart(2, "0")}</span>{pt}</li>
+                            ))}
+                          </ol>
+                        )}
+                        {r.bullets && <Bullets list={r.bullets} />}
+                        {r.items && (
+                          <ul className="space-y-2.5">
+                            {r.items.map(([name, note]) => (
+                              <li key={name} className="text-[15px] leading-relaxed text-ink-2"><span className="font-medium text-ink">{name}:</span> {note}</li>
+                            ))}
+                          </ul>
+                        )}
+                        {r.tableIntro && <p className="text-[15px] leading-relaxed text-ink-2">{r.tableIntro}</p>}
+                        {r.table && (
+                          <div className="overflow-hidden rounded-md border border-line">
+                            <table className="w-full text-left text-[14px]">
+                              <thead className="bg-paper-2">
+                                <tr>{r.table.head.map((th) => <th key={th} className="px-4 py-2.5 font-mono text-[11px] font-normal uppercase tracking-[.12em] text-ink-3">{th}</th>)}</tr>
+                              </thead>
+                              <tbody className="divide-y divide-line">
+                                {r.table.rows.map(([stage, metric]) => (
+                                  <tr key={stage}><td className="px-4 py-2.5 font-medium text-ink">{stage}</td><td className="px-4 py-2.5 text-ink-2">{metric}</td></tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        )}
+                        {r.groups && (
+                          <div className="space-y-5">
+                            {r.groups.map((g) => (
+                              <div key={g.title} className="space-y-2.5">
+                                <p className="text-[15px] font-medium text-ink">{g.title}</p>
+                                {g.text && <p className="text-[15px] leading-relaxed text-ink-2">{g.text}</p>}
+                                {g.label && <p className="text-[14px] italic text-ink-3">{g.label}</p>}
+                                {g.bullets && <Bullets list={g.bullets} />}
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        {r.takeaway && (
+                          <p className="border-l-2 border-sage pl-4 text-[15px] leading-relaxed text-ink-2"><span className="font-medium text-ink">Key takeaway:</span> {r.takeaway}</p>
+                        )}
+                      </div>
+                    );
+                  })()}
                 </div>
               ))}
             </div>
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <Placeholder label="[Insert screenshot] · funnel" onOpen={() => setLb("Funnel analysis")} />
-              <Placeholder label="[Insert screenshot] · affinity map" onOpen={() => setLb("Research synthesis")} />
-            </div>
+            {!d.hideResearchShots && (
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                <Placeholder label="[Insert screenshot] · funnel" onOpen={() => setLb("Funnel analysis")} />
+                <Placeholder label="[Insert screenshot] · affinity map" onOpen={() => setLb("Research synthesis")} />
+              </div>
+            )}
           </CSBlock>
 
-          <CSBlock i={4}>
+          <CSBlock i={4} n={num(4)}>
             <div className="grid gap-4 md:grid-cols-2">
               {[1, 2, 3, 4].map((n) => (
                 <div key={n} className="group rounded-lg border border-line bg-white p-6 transition-colors duration-300 hover:border-sage/40">
@@ -819,7 +1097,7 @@ function CaseStudy({ i, onProgress }: { i: number; onProgress: (p: number) => vo
             </div>
           </CSBlock>
 
-          <CSBlock i={5} lead="From insight → to actionable product opportunity.">
+          <CSBlock i={5} n={num(5)} lead="From insight → to actionable product opportunity.">
             <div className="space-y-3">
               {[1, 2, 3].map((n) => (
                 <div key={n} className="grid items-center gap-3 rounded-lg border border-line bg-white p-5 md:grid-cols-[1fr_32px_1fr]">
@@ -831,22 +1109,31 @@ function CaseStudy({ i, onProgress }: { i: number; onProgress: (p: number) => vo
             </div>
           </CSBlock>
 
-          <CSBlock i={6}>
+          <CSBlock i={6} n={num(6)}>
             <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line md:grid-cols-3">
-              {[["Problem", "[What we're solving]"], ["Hypothesis", "If we [change], then [users] will [behaviour], measured by [metric]."], ["Product solution", "[The bet we chose]"]].map(([h, d], k) => (
+              {[["Problem", d.thinking?.[0] ?? "[What we're solving]"], ["Hypothesis", d.thinking?.[1] ?? "If we [change], then [users] will [behaviour], measured by [metric]."], ["Product solution", d.thinking?.[2] ?? "[The bet we chose]"]].map(([h, t], k) => (
                 <div key={h} className={`p-6 ${k === 2 ? "bg-ink text-paper" : "bg-white"}`}>
                   <p className={`font-mono text-[11px] uppercase tracking-[.12em] ${k === 2 ? "text-paper/50" : "text-ink-3"}`}>{String(k + 1).padStart(2, "0")} · {h}</p>
-                  <p className="mt-6 text-[16px] leading-relaxed">{d}</p>
+                  <p className="mt-6 text-[16px] leading-relaxed">{t}</p>
                 </div>
               ))}
             </div>
             <div className="mt-8 grid gap-6 md:grid-cols-2">
-              <div><p className="text-[15px] font-medium">Decision logic</p><p className="mt-2 text-[15px] text-ink-2">[Options considered, what was rejected, and why.]</p></div>
-              <div><p className="text-[15px] font-medium">Business case & expected outcomes</p><p className="mt-2 text-[15px] text-ink-2">[Expected user and business outcomes.]</p></div>
+              <div><p className="text-[15px] font-medium">Decision logic</p><p className="mt-2 text-[15px] leading-relaxed text-ink-2">{d.decisionLogic ?? "[Options considered, what was rejected, and why.]"}</p></div>
+              <div><p className="text-[15px] font-medium">Business case & expected outcomes</p><p className="mt-2 text-[15px] leading-relaxed text-ink-2">{d.businessCase ?? "[Expected user and business outcomes.]"}</p>
+                {d.expectedOutcomes && (
+                  <>
+                    <p className="mt-5 font-mono text-[11px] uppercase tracking-[.12em] text-sage">Expected outcomes</p>
+                    <ul className="mt-3 space-y-2">
+                      {d.expectedOutcomes.map((o) => <li key={o} className="flex items-center gap-3 text-[15px] text-ink-2"><span className="size-1 shrink-0 rounded-full bg-sage" />{o}</li>)}
+                    </ul>
+                  </>
+                )}
+              </div>
             </div>
           </CSBlock>
 
-          <CSBlock i={7}>
+          <CSBlock i={7} n={num(7)}>
             <Placeholder label="[Insert flow diagram]" ratio="aspect-[16/7]" onOpen={() => setLb("Product flow")} />
             <div className="mt-4 grid grid-cols-3 gap-4">
               {["Screen A", "Screen B", "Screen C"].map((s) => <Placeholder key={s} label="[Insert screenshot]" ratio="aspect-[9/16]" dense onOpen={() => setLb(s)} />)}
@@ -854,19 +1141,19 @@ function CaseStudy({ i, onProgress }: { i: number; onProgress: (p: number) => vo
             <div className="mt-8"><P>[Explain each key product decision and how it ties back to the business case and user need.]</P></div>
           </CSBlock>
 
-          <CSBlock i={8}>
+          <CSBlock i={8} n={num(8)}>
             <div className="grid gap-4 sm:grid-cols-2">
-              {[["Product team", "What strategy did you drive?"], ["Engineering", "How did you align on feasibility and roadmap?"], ["Design", "How did you guide the execution?"], ["Business stakeholders", "What outcomes did you commit to?"]].map(([r, q]) => (
-                <div key={r} className="rounded-lg border border-line bg-white p-6">
-                  <div className="flex items-center gap-3"><span className="grid size-8 place-items-center rounded-full bg-sage-soft font-mono text-[11px] text-sage">{r.split(" ").map((w) => w[0]).join("")}</span><p className="text-[16px] font-medium">{r}</p></div>
+              {[["Product team", "What strategy did you drive?"], ["Engineering", "How did you align on feasibility and roadmap?"], ["Design", "How did you guide the execution?"], ["Business stakeholders", "What outcomes did you commit to?"]].map(([r0, q0], k) => { const o = d.collab?.[k] ?? {}; const r = o.role ?? r0; const q = o.question ?? q0; return (
+                <div key={r0} className="rounded-lg border border-line bg-white p-6">
+                  <div className="flex items-center gap-3"><span className="grid size-8 place-items-center rounded-full bg-sage-soft font-mono text-[11px] text-sage">{o.initials ?? r.split(" ").map((w) => w[0]).join("")}</span><p className="text-[16px] font-medium">{r}</p></div>
                   <p className="mt-4 font-serif text-[15.5px] italic text-ink-3">{q}</p>
-                  <p className="mt-2"><Ph>[Describe collaboration point]</Ph></p>
+                  {o.text === "" ? null : o.text ? <p className="mt-2 text-[15px] leading-relaxed text-ink-2">{o.text}</p> : <p className="mt-2"><Ph>[Describe collaboration point]</Ph></p>}
                 </div>
-              ))}
+              ); })}
             </div>
           </CSBlock>
 
-          <CSBlock i={9}>
+          <CSBlock i={9} n={num(9)}>
             <div className="rounded-lg bg-ink p-8 text-paper">
               <p className="font-mono text-[11px] uppercase tracking-[.14em] text-paper/50">North Star Metric</p>
               <p className="mt-3 text-[28px] font-medium tracking-tight">[Add metric]</p>
@@ -879,7 +1166,7 @@ function CaseStudy({ i, onProgress }: { i: number; onProgress: (p: number) => vo
             <p className="mt-6 text-[15px] text-ink-2"><span className="font-medium text-ink">Success criteria:</span> [What would "success" look like?]</p>
           </CSBlock>
 
-          <CSBlock i={10}>
+          <CSBlock i={10} n={num(10)}>
             <div className="space-y-4">
               {[["Expected impact", "[description]"], ["Success criteria", "[description]"], ["What changed after this shipped?", "[Narrative — what users and the team did differently.]"]].map(([h, d]) => (
                 <div key={h} className="grid gap-2 border-b border-line pb-4 md:grid-cols-[260px_1fr]"><p className="text-[15px] font-medium">{h}</p><p className="text-[15px] text-ink-2">{d}</p></div>
@@ -887,7 +1174,7 @@ function CaseStudy({ i, onProgress }: { i: number; onProgress: (p: number) => vo
             </div>
           </CSBlock>
 
-          <CSBlock i={11}>
+          <CSBlock i={11} n={num(11)}>
             <div className="rounded-lg border border-sage/30 bg-sage-soft p-8">
               <p className="font-mono text-[11px] uppercase tracking-[.14em] text-sage">What I learned as a product leader</p>
               <p className="mt-4 font-serif text-[23px] leading-snug">[2–3 sentences specific to {c.name}: a product decision you'd make differently, a cross-functional lesson, and what it taught you about impact.]</p>
@@ -918,6 +1205,477 @@ function CaseStudy({ i, onProgress }: { i: number; onProgress: (p: number) => vo
       </div>
       <Footer />
       <Lightbox label={lb} src={lb === `${c.name} — hero` ? heroSrc : undefined} onClose={() => setLb(null)} />
+    </div>
+  );
+}
+
+/* ───────────── Alice Blue Super App (bespoke case study) ───────────── */
+
+const SA_SECTIONS = [
+  "Project overview",
+  "Business context",
+  "Product scope",
+  "Planning & roadmap",
+  "Execution & delivery",
+  "Stakeholders",
+  "Quality & bug triage",
+  "Milestones & release",
+  "Measurement",
+  "Outcome",
+  "Key learnings",
+  "Portfolio summary",
+];
+
+function SABlock({ k, children, lead }: { k: number; children: ReactNode; lead?: string }) {
+  return (
+    <section id={`sa${k}`} className="reveal scroll-mt-24 border-t border-line py-16 first:border-t-0 first:pt-0">
+      <p className="font-mono text-[12px] text-sage">{String(k + 1).padStart(2, "0")} —</p>
+      <h2 className="mt-2 text-[30px] font-medium tracking-[-.02em] sm:text-[36px]">{SA_SECTIONS[k]}</h2>
+      {lead && <p className="mt-4 max-w-[640px] font-serif text-[20px] italic leading-snug text-ink-2">{lead}</p>}
+      <div className="mt-8 space-y-6">{children}</div>
+    </section>
+  );
+}
+
+const H3 = ({ children }: { children: ReactNode }) => <h3 className="pt-4 text-[19px] font-medium tracking-[-.01em]">{children}</h3>;
+
+const Note = ({ label = "Note", children }: { label?: string; children: ReactNode }) => (
+  <p className="max-w-[680px] border-l-2 border-sage pl-4 text-[15px] leading-relaxed text-ink-2"><span className="font-medium text-ink">{label}:</span> {children}</p>
+);
+
+function DataTable({ head, rows, first = "font-medium text-ink" }: { head: string[]; rows: ReactNode[][]; first?: string }) {
+  return (
+    <div className="overflow-x-auto rounded-lg border border-line bg-white">
+      <table className="w-full min-w-[520px] text-left text-[14px]">
+        <thead className="bg-paper-2">
+          <tr>{head.map((h) => <th key={h} className="px-4 py-3 font-mono text-[11px] font-normal uppercase tracking-[.12em] text-ink-3">{h}</th>)}</tr>
+        </thead>
+        <tbody className="divide-y divide-line">
+          {rows.map((r, n) => (
+            <tr key={n}>{r.map((cell, j) => <td key={j} className={`px-4 py-3 align-top leading-relaxed ${j === 0 ? first : "text-ink-2"}`}>{cell}</td>)}</tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+const SA_PRODUCTS: [string, string, boolean, boolean][] = [
+  // name, modules, CodiFi delivery stream, draft definition
+  ["Stocks", "Dashboard, watchlist, orders, portfolio, IPO and funds", true, false],
+  ["Mutual Funds", "Fund discovery, SIPs, portfolio and order book", false, false],
+  ["F&O", "Option chain, positions, screeners and trading ideas", true, false],
+  ["eKYC", "Account opening, verification and status tracking", false, false],
+  ["Insurance", "Plan discovery, purchase, policies and claims", false, true],
+  ["Wealth", "Net worth, goals, portfolio and reports", true, true],
+  ["1LY Algos", "Strategies, signals, marketplace and orders", true, false],
+  ["Ask ANT", "Conversational insights, screeners and portfolio queries", true, false],
+];
+
+const SA_LIFECYCLE: [string, string][] = [
+  ["Product requirements and design", "Alice Blue Product and Design defined product intent, user journeys, business rules, screens and acceptance criteria."],
+  ["Design handoff", "Design files and requirements were shared with development team, with handoff and receipt tracked."],
+  ["Technical review and estimation", "Development team reviewed feasibility, APIs, backend dependencies, third-party integrations, edge cases and effort."],
+  ["Clarification and design closure", "Open questions and dependencies were resolved, requirements updated and designs signed off by both teams."],
+  ["Development", "Engineering implemented the agreed functionality against the signed-off requirements."],
+  ["Internal QA", "CodiFi validated functionality, API integrations, UI behaviour, error handling, devices and regression."],
+  ["Alice Blue UAT", "Product and QA teams validated the build against requirements, business logic and acceptance criteria."],
+  ["Defect resolution", "Issues were logged, prioritised, fixed and revalidated through regression testing."],
+  ["Release readiness", "The teams reviewed outstanding defects and completed the release-readiness checklist."],
+];
+
+const SA_ARTEFACTS: [string, string, string?][] = [
+  ["Spreadsheet", "Product-wise roadmap", "https://docs.google.com/spreadsheets/d/1ak3k2MuYqOEc2V2ApiZ_AY8OpHVtekOV6Vl_ETg_e7Y/edit?usp=sharing"],
+  ["Spreadsheet", "CodiFi execution roadmap", "https://docs.google.com/spreadsheets/d/1DMDBrW3AZDEUOZxW3FUNVxoSt2y8EoZHPZvqF6qvTmk/edit?usp=sharing"],
+  ["Spreadsheet", "QC & bug tracker"],
+  ["Document", "Product requirements (PRD)", "https://docs.google.com/document/d/1xmnbgo4bJKTlCiUHeOoLEA7HsH-djgaKHSFoFQrlhbg/edit?usp=sharing"],
+];
+
+function SuperAppCase({ i, onProgress }: { i: number; onProgress: (p: number) => void }) {
+  const c = CASES[i];
+  const [active, setActive] = useState(0);
+  const [lb, setLb] = useState<string | null>(null);
+  const next = CASES[(i + 1) % CASES.length];
+  const heroLabel = `${c.name} — hero`;
+
+  useEffect(() => {
+    const on = () => {
+      const h = document.documentElement;
+      onProgress(Math.min(1, h.scrollTop / (h.scrollHeight - h.clientHeight || 1)));
+      let cur = 0;
+      SA_SECTIONS.forEach((_, k) => {
+        const el = document.getElementById(`sa${k}`);
+        if (el && el.getBoundingClientRect().top < 160) cur = k;
+      });
+      setActive(cur);
+    };
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => { window.removeEventListener("scroll", on); onProgress(0); };
+  }, [i, onProgress]);
+
+  const meta: [string, string][] = [
+    ["Industry", "Fintech · Stockbroking · Wealth Management"],
+    ["Platforms", "Mobile App and Web"],
+    ["Execution period", "July 29 – October 30, 2026"],
+    ["Delivery partners", "Alice Blue and CodiFi"],
+  ];
+
+  return (
+    <div className="page-enter">
+      <div className="mx-auto max-w-[1240px] px-6 pt-10 lg:px-10">
+        <nav aria-label="Breadcrumb" className="flex items-center gap-2 font-mono text-[12px] text-ink-3">
+          <a href="#/" className="hover:text-ink">Home</a><span>/</span>
+          <button onClick={() => { window.location.hash = "#/"; setTimeout(() => scrollToId("work"), 60); }} className="hover:text-ink">Work</button><span>/</span>
+          <span className="text-ink">{c.name}</span>
+        </nav>
+        <div className="grid gap-10 pt-14 pb-16 lg:grid-cols-[1.6fr_1fr] lg:items-end">
+          <div>
+            <p className="font-mono text-[11px] uppercase leading-relaxed tracking-[.14em] text-sage">Product Management · Product Strategy · Roadmap Execution · Cross-functional Delivery</p>
+            <h1 className="mt-6 text-[42px] font-semibold leading-[1.02] tracking-[-.035em] sm:text-[64px]">Alice Blue Super App: Managing Design Handoffs, Reviews &amp; Execution</h1>
+            <p className="mt-6 max-w-[640px] text-[18px] leading-relaxed text-ink-2">Product execution across eight financial product areas: roadmap tracking, design handoffs, engineering coordination, QA and release readiness, on mobile and web.</p>
+          </div>
+          <dl className="grid grid-cols-2 gap-5 border-t border-line pt-6 lg:border-t-0 lg:border-l lg:pl-8 lg:pt-0">
+            {meta.map(([k, v]) => (
+              <div key={k}><dt className="font-mono text-[11px] uppercase tracking-[.12em] text-ink-3">{k}</dt><dd className="mt-1 text-[14px] leading-snug">{v}</dd></div>
+            ))}
+            <div className="col-span-2"><dt className="font-mono text-[11px] uppercase tracking-[.12em] text-ink-3">My role</dt><dd className="mt-1 text-[14px] leading-snug">Product planning, design coordination, roadmap tracking, cross-functional execution and quality review.</dd></div>
+          </dl>
+        </div>
+        <Placeholder label={`${c.name} desktop and mobile screens`} ratio="aspect-[21/9]" src={superAppHero} onOpen={() => setLb(heroLabel)} />
+      </div>
+
+      <div className="mx-auto grid max-w-[1240px] gap-12 px-6 pt-20 pb-10 lg:grid-cols-[220px_1fr] lg:gap-20 lg:px-10">
+        <aside className="hidden lg:block">
+          <nav className="sticky top-24">
+            <p className="mb-4 font-mono text-[11px] uppercase tracking-[.14em] text-ink-3">On this page</p>
+            <ol className="space-y-0.5 border-l border-line">
+              {SA_SECTIONS.map((s, k) => (
+                <li key={s}>
+                  <button onClick={() => scrollToId(`sa${k}`)} className={`-ml-px flex w-full gap-3 border-l py-1.5 pl-4 text-left text-[13.5px] transition-colors duration-200 ${active === k ? "border-sage text-ink" : "border-transparent text-ink-3 hover:text-ink"}`}>
+                    <span className="pt-px font-mono text-[11px]">{String(k + 1).padStart(2, "0")}</span>{s}
+                  </button>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </aside>
+        <div className="sticky top-16 z-30 -mx-6 -mt-12 border-b border-line bg-paper/90 px-6 py-3 backdrop-blur lg:hidden">
+          <select value={active} onChange={(e) => scrollToId(`sa${e.target.value}`)} className="w-full bg-transparent font-mono text-[12px]">
+            {SA_SECTIONS.map((s, k) => <option key={s} value={k}>{String(k + 1).padStart(2, "0")} — {s}</option>)}
+          </select>
+        </div>
+
+        <article className="min-w-0">
+          {/* 01 */}
+          <SABlock k={0}>
+            <P>{c.context}</P>
+            <P>The initiative covered the evolution of existing Alice Blue experiences across Stocks, Mutual Funds, F&amp;O, eKYC, Insurance, Wealth, 1LY Algos and Ask ANT.</P>
+            <P>The objective was to create a consistent experience across mobile and web while coordinating multiple product workstreams, design dependencies, engineering delivery, QA, UAT and deployment readiness within a defined execution timeline.</P>
+            <blockquote className="max-w-[680px] border-l-2 border-sage pl-6 font-serif text-[22px] leading-snug">Rather than treating this as a standalone UI revamp, the initiative required product-level coordination across eight product areas, multiple teams and a phased delivery plan.</blockquote>
+          </SABlock>
+
+          {/* 02 */}
+          <SABlock k={1} lead="From individual product experiences to one connected platform.">
+            <P>Alice Blue’s strategy was to expand its core trading experience into a broader financial services ecosystem. The Super App initiative supported three strategic objectives:</P>
+            <div className="grid gap-4 md:grid-cols-3">
+              {[
+                ["Ecosystem expansion", "Bring trading, investing, wealth management, onboarding and financial services into one platform."],
+                ["Customer experience improvement", "Create consistent navigation and interaction patterns across products and platforms."],
+                ["Product adoption", "Make it easier for customers to discover and access multiple services within the Alice Blue ecosystem."],
+              ].map(([h, t], n) => (
+                <div key={h} className="rounded-lg border border-line bg-white p-6">
+                  <span className="font-mono text-[11px] text-sage">{String(n + 1).padStart(2, "0")}</span>
+                  <p className="mt-3 text-[16px] font-medium">{h}</p>
+                  <p className="mt-2 text-[15px] leading-relaxed text-ink-2">{t}</p>
+                </div>
+              ))}
+            </div>
+            <P>The strategic shift was from delivering individual product experiences independently to managing them as connected parts of one larger platform.</P>
+          </SABlock>
+
+          {/* 03 */}
+          <SABlock k={2}>
+            <P>The roadmap covered eight product areas, each with its own modules, delivery dependencies and release sequence.</P>
+            <div className="overflow-hidden rounded-lg border border-line">
+              <div className="bg-ink px-6 py-6 text-paper">
+                <p className="text-[20px] font-semibold tracking-tight">Alice Blue Super App</p>
+                <p className="mt-1 font-mono text-[11px] uppercase tracking-[.14em] text-paper/55">Connected financial services ecosystem</p>
+              </div>
+              <div className="grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
+                {SA_PRODUCTS.map(([name, mods], n) => (
+                  <div key={name} className="flex flex-col bg-white p-5">
+                    <span className="font-mono text-[11px] text-ink-3">{String(n + 1).padStart(2, "0")}</span>
+                    <p className="mt-2 text-[16px] font-medium">{name}</p>
+                    <p className="mt-1.5 flex-1 text-[14px] leading-relaxed text-ink-2">{mods}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <p className="font-mono text-[11px] leading-relaxed text-ink-3">Product scope based on the product-wise roadmap. Insurance and Wealth module definitions were marked as draft and pending confirmation in the roadmap.</p>
+            <P>The product scope was not identical across every execution document. The CodiFi delivery roadmap defined five primary delivery streams: Stocks, F&amp;O, Ask ANT, 1LY Algos and Wealth. The broader product-wise roadmap additionally tracked Mutual Funds, eKYC and Insurance.</P>
+            <Note label="Why it matters">The wider ecosystem scope and the partner delivery scope had different workstream boundaries.</Note>
+          </SABlock>
+
+          {/* 04 */}
+          <SABlock k={3} lead="Keep one dependency from delaying the whole programme.">
+            <P>One of the main product management challenges was coordinating several product workstreams without allowing dependencies in one area to delay the entire programme. The execution plan was structured around:</P>
+            <FlowChain steps={["Prioritisation", "Mobile & web tracks", "Phased waves", "Design sign-off", "Development", "QA & UAT", "Release readiness"]} />
+            <H3>Prioritisation and delivery waves</H3>
+            <P>The development execution roadmap used four priority waves.</P>
+            <DataTable
+              head={["Priority", "Product", "Delivery wave"]}
+              first=""
+              rows={[["P0", "Stocks", "Wave 1"], ["P0", "F&O", "Wave 2"], ["P1", "Ask ANT", "Wave 3"], ["P1", "1LY Algos", "Wave 3"], ["P2", "Wealth", "Wave 4"]].map(([p, prod, w]) => [
+                <Tag key={p} tone={p === "P0" ? "sage" : p === "P1" ? "neutral" : "outline"}>{p}</Tag>,
+                <span key={prod} className="font-medium text-ink">{prod}</span>,
+                w,
+              ])}
+            />
+            <P>This sequencing placed core trading experiences first, followed by AI-assisted and algorithmic experiences, with Wealth scheduled as a later priority. The broader product-wise roadmap also included Mutual Funds, eKYC and Insurance with their own planned build, QA and deployment windows.</P>
+
+            <H3>Timeline and platform planning</H3>
+            <div className="grid gap-4 md:grid-cols-2">
+              {[
+                ["Mobile execution", "13 weeks", "29 July – 30 October", 0],
+                ["Web execution", "10 weeks", "20 August – 30 October", 23.7],
+              ].map(([label, weeks, range, offset]) => (
+                <div key={label as string} className="rounded-lg border border-line bg-white p-6">
+                  <p className="font-mono text-[11px] uppercase tracking-[.12em] text-ink-3">{label}</p>
+                  <p className="mt-3 text-[40px] font-semibold leading-none tracking-[-.03em]">{weeks}</p>
+                  <p className="mt-2 text-[14px] text-ink-2">{range}</p>
+                  <div className="relative mt-6 h-1.5 rounded-full bg-paper-2">
+                    <div className="absolute inset-y-0 right-0 rounded-full bg-sage" style={{ left: `${offset}%` }} />
+                  </div>
+                  <div className="mt-2 flex justify-between font-mono text-[10px] text-ink-3"><span>29 Jul</span><span>30 Oct</span></div>
+                </div>
+              ))}
+            </div>
+            <Note label="Why separate tracks mattered">Mobile execution started on July 29, while the web track began on August 20 after the Stocks and F&amp;O web designs were handed over to CodiFi. Separate timelines helped account for platform-specific design and development dependencies.</Note>
+            <P>The programme was planned around a hard completion milestone of October 30, 2026.</P>
+            <Placeholder label="Product-wise roadmap: build, QA & feedback and deployment by product" ratio="aspect-[1262/670]" src={superAppRoadmap} onOpen={() => setLb("Product-wise roadmap")} />
+          </SABlock>
+
+          {/* 05 */}
+          <SABlock k={4}>
+            <P>The initiative required a structured handoff between Alice Blue’s product and design teams and CodiFi’s engineering and QA teams. The delivery process established a common lifecycle for every feature.</P>
+            <H3>Feature delivery lifecycle</H3>
+            <ol className="divide-y divide-line rounded-lg border border-line bg-white">
+              {SA_LIFECYCLE.map(([h, t], n) => (
+                <li key={h} className="grid gap-2 p-5 md:grid-cols-[40px_220px_1fr]">
+                  <span className="font-mono text-[11px] text-sage">{String(n + 1).padStart(2, "0")}</span>
+                  <p className="text-[15px] font-medium">{h}</p>
+                  <p className="text-[15px] leading-relaxed text-ink-2">{t}</p>
+                </li>
+              ))}
+            </ol>
+            <H3>Product management responsibilities</H3>
+            <P>My work within this process involved coordinating the design and delivery side of the product lifecycle:</P>
+            <Bullets list={[
+              "Tracking product-wise progress against the agreed roadmap.",
+              "Coordinating daily and weekly discussions with the design partner.",
+              "Reviewing design deliverables and communicating feedback.",
+              "Aligning design requirements with developers before implementation.",
+              "Following up on technical clarifications and changes affecting delivery.",
+              "Coordinating with QA teams on reported issues and required fixes.",
+              "Reviewing product gaps and ensuring they were communicated to the responsible teams.",
+              "Supporting UAT and release-readiness follow-ups.",
+            ]} />
+            <P>This helped connect product requirements, design decisions and engineering execution rather than treating them as separate activities.</P>
+          </SABlock>
+
+          {/* 06 */}
+          <SABlock k={5}>
+            <P>The project involved coordination between internal teams and an external development partner.</P>
+            <DataTable
+              head={["Stakeholder", "Area of responsibility", "Coordination focus"]}
+              rows={[
+                ["Alice Blue Product", "Product scope and priorities", "Requirements, roadmap and delivery tracking"],
+                ["Alice Blue Design", "UX and interface specifications", "Design feedback, consistency and sign-off"],
+                ["CodiFi", "Engineering and implementation", "Feasibility, development and technical dependencies"],
+                ["CodiFi QA", "Internal quality validation", "Functional and regression testing"],
+                ["Alice Blue QA", "UAT and acceptance", "Defect reporting and verification"],
+                ["Business stakeholders", "Business priorities", "Scope, timelines and release alignment"],
+              ]}
+            />
+            <Note label="Key coordination challenge">The teams needed to maintain alignment across multiple products and platforms while design changes, technical dependencies and QA findings were being addressed in parallel.</Note>
+            <P>The structured review and sign-off process helped establish clear ownership and reduced ambiguity before development moved forward.</P>
+          </SABlock>
+
+          {/* 07 */}
+          <SABlock k={6}>
+            <P>Quality management was an important part of the Super App execution, particularly because the initiative involved multiple complex trading and investment workflows. The QC tracker captured issues across functional behaviour, UI consistency, API integrations, navigation, data display and user interactions.</P>
+            <H3>Examples of issues identified</H3>
+            <DataTable
+              head={["Area", "Reported issue", "Product impact"]}
+              rows={[
+                ["Login", "Forgot User ID flow failed at OTP stage", "Users could be blocked during account recovery"],
+                ["Login", "Sensitive OTP inputs remained available through browser navigation", "Security and privacy concern"],
+                ["Ticker tape", "Missing absolute point change", "Incomplete market information"],
+                ["Ticker tape", "Did not pause on hover", "Difficulty reading market data"],
+                ["Workspace", "Chart data became invalid when other widgets opened", "Disrupted trading workflow"],
+                ["Watchlist", "Search results lacked quick Buy/Sell/Chart actions", "Additional steps to execute actions"],
+                ["Order and trading workspace", "Widget resizing lag and interaction issues", "Reduced usability for active traders"],
+                ["Login", "Incorrect or misleading CTA labels", "User confusion during authentication"],
+              ]}
+            />
+            <H3>Defect severity and ownership</H3>
+            <P>The CodiFi bug tracker contained 40 populated issue records:</P>
+            <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-3">
+              {[["20", "High severity", 50], ["16", "Medium severity", 40], ["4", "Low severity", 10]].map(([n, l, pct]) => (
+                <div key={l as string} className="bg-white p-6">
+                  <p className="text-[44px] font-semibold leading-none tracking-[-.03em]">{n}</p>
+                  <p className="mt-2 font-mono text-[11px] uppercase tracking-[.12em] text-ink-3">{l}</p>
+                  <div className="mt-5 h-1 rounded-full bg-paper-2"><div className="h-full rounded-full bg-sage" style={{ width: `${pct}%` }} /></div>
+                </div>
+              ))}
+            </div>
+            <Note label="Recorded status">At the time represented in the tracker, all 40 CodiFi records were marked Open in QA and Pending Review in development status. These should be treated as recorded status, not as evidence that all issues remained unresolved at final release.</Note>
+            <P>The separate Alice Blue issue sheet contained four populated observations: one was marked Closed, two were High severity and one each was Medium and Low severity.</P>
+            <H3>Quality management approach</H3>
+            <P>The product-side focus was to:</P>
+            <ol className="space-y-2.5">
+              {[
+                "Review reported issues and understand their impact on user journeys.",
+                "Distinguish functional defects from design, content and scope gaps.",
+                "Communicate findings to the responsible design or development team.",
+                "Track severity and resolution status.",
+                "Verify fixes through QA and regression.",
+                "Escalate critical issues affecting login, trading or financial information.",
+              ].map((pt, n) => (
+                <li key={pt} className="flex gap-3 text-[15px] leading-relaxed text-ink-2"><span className="pt-[3px] font-mono text-[11px] text-sage">{String(n + 1).padStart(2, "0")}</span>{pt}</li>
+              ))}
+            </ol>
+            <P>This made bug tracking part of product delivery management rather than simply a list of visual corrections.</P>
+            <Placeholder label="QC tracker: issues logged with severity, priority, dev and QA status" ratio="aspect-[1699/725]" src={superAppQc} onOpen={() => setLb("QC tracker")} />
+          </SABlock>
+
+          {/* 08 */}
+          <SABlock k={7}>
+            <P>The CodiFi execution plan established eight programme milestones to control progress and delivery readiness.</P>
+            <DataTable
+              head={["Milestone", "Planned date", "Key checkpoint"]}
+              first="font-mono text-[13px] text-sage"
+              rows={[
+                ["M1", "29 July", "Mobile execution baseline"],
+                ["M2", "20 August", "Stocks and F&O web design handover"],
+                ["M3", "4 September", "Stocks mobile UAT and web review"],
+                ["M4", "11 September", "First web development-ready packages"],
+                ["M5", "18 September", "Mobile design sign-off completion"],
+                ["M6", "9 October", "Feature freeze"],
+                ["M7", "23 October", "In-window UAT completion"],
+                ["M8", "30 October", "Release readiness sign-off"],
+              ]}
+            />
+            <P>A key distinction in the programme was that <strong className="font-semibold text-ink">release readiness was not the same as production deployment</strong>. The CodiFi roadmap defined October 30 as the release-readiness sign-off milestone, while the product-wise roadmap targeted the full eight-product platform deployment by that date.</P>
+            <P>This separation helped make the delivery expectations clearer across teams.</P>
+          </SABlock>
+
+          {/* 09 */}
+          <SABlock k={8} lead="Success measured at both the delivery and product levels.">
+            <H3>Delivery metrics</H3>
+            <DataTable
+              head={["Metric", "What it measures"]}
+              rows={[
+                ["Roadmap milestone adherence", "Progress against planned dates"],
+                ["Design sign-off completion", "Readiness of requirements for development"],
+                ["Development completion", "Delivery against agreed scope"],
+                ["UAT completion", "Product acceptance against requirements"],
+                ["Critical defect closure", "Quality and release risk"],
+                ["Release readiness", "Completion of required delivery gates"],
+              ]}
+            />
+            <H3>Product performance metrics</H3>
+            <P>Following deployment, the product should also be measured through:</P>
+            <Bullets list={[
+              "Adoption of the new Super App experience.",
+              "Usage across Stocks, Mutual Funds, F&O and other modules.",
+              "Account opening to activation conversion.",
+              "First fund addition and first trade conversion.",
+              "Feature discovery and task completion.",
+              "Repeat engagement and retention.",
+              "Crash rates, error rates and customer feedback.",
+            ]} />
+            <Note label="Proposed measures">The supplied roadmaps and bug trackers establish the delivery plan and quality findings, but do not provide verified post-launch adoption or business performance results.</Note>
+          </SABlock>
+
+          {/* 10 */}
+          <SABlock k={9}>
+            <P>The project established a structured execution framework for a multi-product, multi-platform Super App initiative. The documented work included:</P>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {[
+                "Eight product areas tracked through a product-wise roadmap.",
+                "Separate mobile and web execution plans.",
+                "Priority-based delivery waves.",
+                "Defined design review, development, QA and UAT stages.",
+                "Eight programme-level delivery milestones.",
+                "A documented defect-tracking process across development and QA.",
+                "A planned October 30, 2026 completion and release-readiness milestone.",
+              ].map((t) => (
+                <div key={t} className="flex gap-3 rounded-lg border border-line bg-white p-5 text-[15px] leading-relaxed text-ink-2">
+                  <span className="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-sage" />{t}
+                </div>
+              ))}
+            </div>
+            <Note label="Planned, not confirmed">The broader product-wise roadmap targeted all eight products for deployment by October 30. The CodiFi programme separately defined release readiness by that date. These are planned milestones, not confirmation of actual production deployment.</Note>
+            <Placeholder label="Product & module breakdown: phase-wise timelines and module status" ratio="aspect-[897/741]" src={superAppModules} onOpen={() => setLb("Module breakdown")} />
+          </SABlock>
+
+          {/* 11 */}
+          <SABlock k={10}>
+            <div className="space-y-4">
+              {[
+                ["Managing a product programme requires more than tracking feature completion.", "I learned to look at dependencies between design, engineering, QA and business priorities, because delays or unresolved decisions in one stage can affect multiple downstream activities."],
+                ["Clear ownership and sign-off are essential.", "A design being shared does not mean it is ready for development. Technical clarification, acceptance criteria and formal design closure are important checkpoints."],
+                ["Quality is part of product experience.", "Issues involving login, market data, order workflows and navigation can directly affect user trust and task completion. Bug triage must therefore consider business and user impact, not just severity labels."],
+              ].map(([h, t], n) => (
+                <div key={h} className="grid gap-3 rounded-lg border border-line bg-white p-6 md:grid-cols-[40px_1fr]">
+                  <span className="font-serif text-[32px] leading-none text-sage">{n + 1}.</span>
+                  <div><p className="font-serif text-[21px] leading-snug">{h}</p><p className="mt-2 text-[15px] leading-relaxed text-ink-2">{t}</p></div>
+                </div>
+              ))}
+            </div>
+          </SABlock>
+
+          {/* 12 */}
+          <SABlock k={11}>
+            <div className="rounded-lg bg-ink p-8 text-paper sm:p-10">
+              <p className="font-mono text-[11px] uppercase tracking-[.14em] text-paper/50">{c.name}</p>
+              <p className="mt-3 text-[26px] font-medium leading-tight tracking-tight sm:text-[30px]">Product execution across eight financial product areas</p>
+              <p className="mt-5 max-w-[680px] text-[16px] leading-relaxed text-paper/70">Led and coordinated product design and delivery activities for Alice Blue’s multi-product Super App initiative across mobile and web. Worked across roadmap tracking, design handoffs, engineering coordination, stakeholder alignment, QA reviews and defect follow-ups to support a phased delivery programme with an October 2026 release-readiness target.</p>
+              <p className="mt-8 font-mono text-[11px] uppercase tracking-[.14em] text-paper/50">Product management capabilities demonstrated</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {["Product roadmap execution", "Prioritisation", "Cross-functional collaboration", "Stakeholder management", "Requirements coordination", "Design sign-off", "QA and UAT", "Bug triage", "Release readiness"].map((t) => (
+                  <span key={t} className="rounded-[4px] border border-paper/15 px-2.5 py-1 font-mono text-[11px] uppercase tracking-[.06em] text-paper/80">{t}</span>
+                ))}
+              </div>
+            </div>
+            <div className="rounded-lg border border-line bg-white p-8">
+              <p className="font-mono text-[11px] uppercase tracking-[.14em] text-ink-3">Supporting artefacts</p>
+              <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                {SA_ARTEFACTS.map(([kind, title, href]) => href ? (
+                  <a key={title} href={href} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between rounded-md border border-line px-5 py-4 transition-colors hover:border-sage/40 hover:bg-sage-soft">
+                    <div><p className="font-mono text-[11px] uppercase tracking-[.12em] text-sage">{kind}</p><p className="mt-1 text-[16px] font-medium">{title}</p></div>
+                    <Arrow className="-rotate-45 transition-transform duration-200 group-hover:translate-x-0.5" />
+                  </a>
+                ) : (
+                  <div key={title} className="flex items-center justify-between rounded-md border border-dashed border-line px-5 py-4">
+                    <div><p className="font-mono text-[11px] uppercase tracking-[.12em] text-sage">{kind}</p><p className="mt-1 text-[16px] font-medium">{title}</p></div>
+                    <span className="font-mono text-[11px] text-ink-3">[Add link]</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </SABlock>
+
+          <a href={`#/case/${next.slug}`} className="group mt-10 flex items-center justify-between rounded-lg border border-line bg-white p-8 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-24px_rgba(18,22,20,.3)]">
+            <div><p className="font-mono text-[11px] uppercase tracking-[.14em] text-ink-3">Next case study</p><p className="mt-2 text-[24px] font-semibold tracking-tight">{next.name}</p></div>
+            <span className="grid size-11 place-items-center rounded-full border border-line transition-colors group-hover:bg-ink group-hover:text-paper"><Arrow /></span>
+          </a>
+        </article>
+      </div>
+      <Footer />
+      <Lightbox label={lb} src={lb === heroLabel ? superAppHero : lb === "Product-wise roadmap" ? superAppRoadmap : lb === "QC tracker" ? superAppQc : lb === "Module breakdown" ? superAppModules : undefined} onClose={() => setLb(null)} />
     </div>
   );
 }
@@ -1066,7 +1824,7 @@ export default function App() {
       <Header route={route} progress={route.name === "case" ? progress : undefined} />
       <main key={key} className="page-enter">
         {route.name === "home" && <Home />}
-        {route.name === "case" && <CaseStudy i={route.i} onProgress={setProgress} />}
+        {route.name === "case" && (CASES[route.i].slug === "super-app" ? <SuperAppCase i={route.i} onProgress={setProgress} /> : <CaseStudy i={route.i} onProgress={setProgress} />)}
         {route.name === "system" && <><System /><Footer /></>}
       </main>
     </div>
