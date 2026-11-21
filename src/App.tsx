@@ -173,11 +173,11 @@ const Eyebrow = ({ n, children }: { n?: string; children: ReactNode }) => (
   </div>
 );
 
-function Placeholder({ label = "[Insert screenshot]", ratio = "aspect-[16/10]", onOpen, dense, src }: { label?: string; ratio?: string; onOpen?: () => void; dense?: boolean; src?: string }) {
+function Placeholder({ label = "[Insert screenshot]", ratio = "aspect-[16/10]", onOpen, dense, src, fit = "cover" }: { label?: string; ratio?: string; onOpen?: () => void; dense?: boolean; src?: string; fit?: "cover" | "contain" }) {
   if (src) {
     return (
       <button onClick={onOpen} className={`relative block w-full ${ratio} overflow-hidden rounded-md border border-line bg-paper-2 ${onOpen ? "cursor-zoom-in" : "cursor-default"}`}>
-        <img src={src} alt={label} className="absolute inset-0 h-full w-full object-cover" />
+        <img src={src} alt={label} className={`absolute inset-0 h-full w-full ${fit === "contain" ? "bg-white object-contain p-3" : "object-cover"}`} />
       </button>
     );
   }
@@ -427,7 +427,7 @@ function CaseCard({ c, i }: { c: Case; i: number }) {
       <h3 className="text-[26px] font-semibold leading-tight tracking-[-.02em]">{c.name}</h3>
       <p className="mt-2 text-[13px] text-sage">{c.tags.join(" · ")}</p>
       <p className="mt-4 text-[15px] leading-relaxed text-ink-2">{c.problem}</p>
-      <div className="my-7">{c.slug === "super-app" ? <Placeholder label={`${c.name} desktop and mobile screens`} src={superAppHero} /> : <Placeholder label={`[Insert screenshot] · ${c.name}`} />}</div>
+      <div className="my-7">{c.slug === "super-app" ? <Placeholder label={`${c.name} desktop and mobile screens`} src={superAppHero} /> : c.slug === "ekyc-activation" ? <Placeholder label="End-to-end activation funnel journey map" src={ekycHero} fit="contain" /> : <Placeholder label={`[Insert screenshot] · ${c.name}`} />}</div>
       <ul className="space-y-2 border-t border-line pt-5">
         {c.highlights.slice(0, 3).map((h) => (
           <li key={h} className="flex items-center gap-3 text-[14px]"><span className="size-1 rounded-full bg-sage" />{h}</li>
